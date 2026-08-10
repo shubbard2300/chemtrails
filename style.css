@@ -270,6 +270,13 @@ body {
   margin: 0 auto !important;
 }
 
+/* support — tip jar */
+.section-support { text-align: center; }
+.support-inner { max-width: 520px; margin: 0 auto; }
+.support-inner h2 { margin-bottom: 16px; }
+.support-inner p { color: var(--fog); margin-bottom: 30px; }
+.paypal-slot { max-width: 340px; margin: 0 auto; }
+
 /* about */
 .section-about { padding-bottom: 110px; }
 .about-grid {

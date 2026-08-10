@@ -62,7 +62,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700;900&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -135,6 +135,14 @@
       </div>
     </section>
 
+    <section class="section section-support" id="support">
+      <div class="support-inner">
+        <h2>Fuel the Transmissions</h2>
+        <p>If the music's landed somewhere in your orbit, you can send a signal back. Tips keep the transmitter warm.</p>
+        <div id="paypal-container-W5HUHU7FYFXY8" class="paypal-slot"></div>
+      </div>
+    </section>
+
     <section class="section section-about" id="about">
       <div class="about-grid">
         <div class="about-photo">
@@ -181,5 +189,11 @@
   </div>
 
   <script src="player.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=BAAyiw5QmfubsaQCV48XZTRd8Fh3pSjA6s7pU_JaaiOaEiz0f9_mFL3SMmcT1RymLvmzUF-YuU1r9inkRU&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
+  <script>
+    paypal.HostedButtons({
+      hostedButtonId: "W5HUHU7FYFXY8",
+    }).render("#paypal-container-W5HUHU7FYFXY8")
+  </script>
 </body>
 </html>
