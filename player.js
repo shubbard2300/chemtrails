@@ -1,16 +1,16 @@
 // CHEMTRAILS — track data + custom player (audio streamed from Suno CDN)
 
 const TRACKS = [
-  { id: "e386b415-6631-4db4-a7e0-5a2f223763ad", title: "Orbitz", genre: "Featured", art: "assets/orbitz.jpeg" },
-  { id: "c7a8cc47-2473-4f89-a687-080d9e71f0bd", title: "The World \"Jones\" Made", genre: "British 1980 Synth-Pop", art: "assets/jones.jpeg" },
-  { id: "01450842-42c2-469d-b662-41d974601d05", title: "King Tides", genre: "Disco-Pop", art: "assets/king-tides.jpeg" },
-  { id: "9c366f6b-951b-44e2-8e81-1770b89bf888", title: "Black Halo Signal", genre: "Trip-Hop", art: "assets/black-halo-signal.jpeg" },
-  { id: "58b96d52-784f-46fc-8953-d5852c6ab7f4", title: "Coastal Cathedral", genre: "Disco", art: "assets/coastal-cathedral.jpeg" },
-  { id: "b23ad991-6f07-45dc-9fe3-ac81f9101733", title: "The Last Space Boat To Mars", genre: "Retro Orchestral Pop", art: "assets/space-boat.jpeg" },
-  { id: "c950f9a1-ea0f-4c4b-b43e-944acfe18d25", title: "The Last Space Boat To Mars (Instrumental)", genre: "Retro Orchestral Pop", art: "assets/space-boat-instrumental.jpeg" },
-  { id: "29b38dd7-fa24-4880-963e-b2eb981b22b1", title: "Velvet Ferrari", genre: "Disco Rock", art: "assets/velvet-ferrari.jpeg" },
-  { id: "0ae0553f-181c-4e66-a78e-62f894511678", title: "Black Cat", genre: "", art: "assets/black-cat.jpeg" },
-  { id: "4cba3ba6-f7e5-4bb4-a421-d50d293eeb73", title: "The Creatures We Are All", genre: "", art: "assets/creatures.jpeg" },
+  { id: "e386b415-6631-4db4-a7e0-5a2f223763ad", title: "Orbitz", genre: "Featured", art: "assets/orbitz.webp" },
+  { id: "c7a8cc47-2473-4f89-a687-080d9e71f0bd", title: "The World \"Jones\" Made", genre: "British 1980 Synth-Pop", art: "assets/jones.webp" },
+  { id: "01450842-42c2-469d-b662-41d974601d05", title: "King Tides", genre: "Disco-Pop", art: "assets/king-tides.webp" },
+  { id: "9c366f6b-951b-44e2-8e81-1770b89bf888", title: "Black Halo Signal", genre: "Trip-Hop", art: "assets/black-halo-signal.webp" },
+  { id: "58b96d52-784f-46fc-8953-d5852c6ab7f4", title: "Coastal Cathedral", genre: "Disco", art: "assets/coastal-cathedral.webp" },
+  { id: "b23ad991-6f07-45dc-9fe3-ac81f9101733", title: "The Last Space Boat To Mars", genre: "Retro Orchestral Pop", art: "assets/space-boat.webp" },
+  { id: "c950f9a1-ea0f-4c4b-b43e-944acfe18d25", title: "The Last Space Boat To Mars (Instrumental)", genre: "Retro Orchestral Pop", art: "assets/space-boat-instrumental.webp" },
+  { id: "29b38dd7-fa24-4880-963e-b2eb981b22b1", title: "Velvet Ferrari", genre: "Disco Rock", art: "assets/velvet-ferrari.webp" },
+  { id: "0ae0553f-181c-4e66-a78e-62f894511678", title: "Black Cat", genre: "", art: "assets/black-cat.webp" },
+  { id: "4cba3ba6-f7e5-4bb4-a421-d50d293eeb73", title: "The Creatures We Are All", genre: "", art: "assets/creatures.webp" },
 ];
 
 const audioUrl = (t) => `https://cdn1.suno.ai/${t.id}.mp3`;
@@ -38,7 +38,7 @@ TRACKS.forEach((t, i) => {
   card.dataset.index = i;
   card.innerHTML = `
     <div class="track-art">
-      <img src="${t.art}" alt="${t.title} artwork" loading="lazy">
+      <img src="${t.art}" alt="${t.title} artwork" loading="lazy" decoding="async" width="640" height="640">
       <div class="play-badge">▶</div>
     </div>
     <div class="track-info">

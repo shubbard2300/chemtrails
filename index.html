@@ -58,10 +58,13 @@
 
     gtag('config', 'G-CT6DLJGNE0');
   </script>
-  <link rel="icon" href="assets/avatar.jpeg">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700;900&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn1.suno.ai">
+  <link rel="preload" as="image" href="assets/banner.webp" fetchpriority="high">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;700;900&family=Space+Grotesk:wght@300;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
@@ -109,9 +112,9 @@
     <section class="section" id="merch">
       <a class="merch-cta" href="https://chemtrails-music.myspreadshop.com/" target="_blank" rel="noopener">
         <div class="merch-thumbs" aria-hidden="true">
-          <img src="assets/merch/ct-hoodie.jpeg" alt="" loading="lazy">
-          <img src="assets/merch/owls-tee.jpeg" alt="" loading="lazy">
-          <img src="assets/merch/ct-mug.jpeg" alt="" loading="lazy">
+          <img src="assets/merch/ct-hoodie.webp" alt="" loading="lazy" decoding="async" width="160" height="160">
+          <img src="assets/merch/owls-tee.webp" alt="" loading="lazy" decoding="async" width="160" height="160">
+          <img src="assets/merch/ct-mug.webp" alt="" loading="lazy" decoding="async" width="160" height="160">
         </div>
         <div class="merch-cta-copy">
           <h2>Wearable transmissions</h2>
@@ -145,7 +148,7 @@
     <section class="section section-about" id="about">
       <div class="about-grid">
         <div class="about-photo">
-          <img src="assets/avatar.jpeg" alt="Chemtrails" loading="lazy">
+          <img src="assets/avatar.webp" alt="Chemtrails" loading="lazy" decoding="async" width="640" height="640">
         </div>
         <div class="about-text">
           <h2>About</h2>
@@ -188,11 +191,22 @@
   </div>
 
   <script src="player.js"></script>
-  <script src="https://www.paypal.com/sdk/js?client-id=BAAyiw5QmfubsaQCV48XZTRd8Fh3pSjA6s7pU_JaaiOaEiz0f9_mFL3SMmcT1RymLvmzUF-YuU1r9inkRU&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
   <script>
-    paypal.HostedButtons({
-      hostedButtonId: "W5HUHU7FYFXY8",
-    }).render("#paypal-container-W5HUHU7FYFXY8")
+    // Load the PayPal SDK after the page has painted, so it never blocks first render
+    (function () {
+      let loaded = false;
+      function loadPayPal() {
+        if (loaded) return;
+        loaded = true;
+        const s = document.createElement("script");
+        s.src = "https://www.paypal.com/sdk/js?client-id=BAAyiw5QmfubsaQCV48XZTRd8Fh3pSjA6s7pU_JaaiOaEiz0f9_mFL3SMmcT1RymLvmzUF-YuU1r9inkRU&components=hosted-buttons&enable-funding=venmo&currency=USD";
+        s.onload = () => paypal.HostedButtons({ hostedButtonId: "W5HUHU7FYFXY8" }).render("#paypal-container-W5HUHU7FYFXY8");
+        document.body.appendChild(s);
+      }
+      if (document.readyState === "complete") loadPayPal();
+      else window.addEventListener("load", loadPayPal);
+      setTimeout(loadPayPal, 4000); // safety net if load already fired or stalls
+    })();
   </script>
 </body>
 </html>
