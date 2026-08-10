@@ -198,6 +198,49 @@ body {
 .track-genre { color: var(--fog-dim); font-size: 13px; margin-top: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
 .more-row { text-align: center; margin-top: 52px; }
 
+/* merch — compact CTA band */
+#merch { padding-top: 0; padding-bottom: 0; }
+.merch-cta {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 26px 32px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(120deg, var(--bg-2), rgba(240,163,94,0.05));
+  text-decoration: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.merch-cta:hover {
+  border-color: rgba(240,163,94,0.45);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.4);
+}
+.merch-thumbs { display: flex; flex-shrink: 0; }
+.merch-thumbs img {
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--bg);
+  margin-left: -16px;
+  transition: transform 0.3s;
+}
+.merch-thumbs img:first-child { margin-left: 0; }
+.merch-cta:hover .merch-thumbs img { transform: translateY(-3px); }
+.merch-cta-copy { flex: 1; min-width: 0; }
+.merch-cta-copy h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.merch-cta-copy p { color: var(--fog-dim); font-size: 14.5px; margin-top: 6px; }
+.merch-cta-btn { flex-shrink: 0; }
+@media (max-width: 700px) {
+  .merch-cta { flex-direction: column; text-align: center; gap: 18px; }
+}
+
 /* the signal — manifesto */
 .section-signal { text-align: center; }
 .signal-inner { max-width: 680px; margin: 0 auto; }
