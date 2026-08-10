@@ -198,6 +198,35 @@ body {
 .track-genre { color: var(--fog-dim); font-size: 13px; margin-top: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
 .more-row { text-align: center; margin-top: 52px; }
 
+/* the signal — manifesto */
+.section-signal { text-align: center; }
+.signal-inner { max-width: 680px; margin: 0 auto; }
+.signal-inner h2 { margin-bottom: 34px; }
+.signal-inner p { color: var(--fog); margin-bottom: 20px; font-size: 16.5px; }
+.signal-inner em { color: var(--ink); font-style: normal; font-weight: 500; }
+.signal-pull {
+  margin: 44px 0;
+  padding: 30px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.signal-pull p {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(17px, 2.6vw, 23px);
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.signal-pull p:last-child { margin-bottom: 0; }
+.signal-thesis {
+  color: var(--accent) !important;
+  font-size: 18px !important;
+  font-weight: 500;
+  max-width: 560px;
+  margin: 0 auto !important;
+}
+
 /* about */
 .section-about { padding-bottom: 110px; }
 .about-grid {
