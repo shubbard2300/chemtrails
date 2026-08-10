@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHEMTRAILS — Retro-Futuristic Synth-Rock</title>
+  <meta name="description" content="Chemtrails — a retro-futuristic synth-rock project exploring the strange space between memory, technology, desire, and the unknown. Pacific Northwest fog, cinematic atmosphere, ambient texture.">
+  <meta property="og:title" content="CHEMTRAILS">
+  <meta property="og:description" content="Retro-futuristic synth-rock from the Pacific Northwest. Memory, technology, desire, and the unknown.">
+  <meta property="og:image" content="https://chemtrails.vercel.app/assets/orbitz.jpeg">
+  <meta property="og:url" content="https://chemtrails.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0a0c10">
+  <link rel="icon" href="assets/avatar.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700;900&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a href="#top" class="nav-logo">CHEMTRAILS</a>
+    <div class="nav-links">
+      <a href="#music">Music</a>
+      <a href="#about">About</a>
+      <a href="https://suno.com/@gamecat2300" target="_blank" rel="noopener">Suno ↗</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-fog" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-kicker">Portland, Oregon · Synth-Rock / Ambient</p>
+      <h1 class="hero-title">CHEM<span>TRAILS</span></h1>
+      <p class="hero-tagline">A retro-futuristic synth-rock project exploring the strange space between memory, technology, desire, and the unknown.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" id="hero-play" data-track="0">▶&nbsp;&nbsp;Play Orbitz</button>
+        <a class="btn btn-ghost" href="#music">Browse the music</a>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">▾</div>
+  </header>
+
+  <main>
+    <section class="section" id="music">
+      <div class="section-head">
+        <h2>Transmissions</h2>
+        <p class="section-sub">Latest tracks — streamed straight from the source.</p>
+      </div>
+      <div class="track-grid" id="track-grid"><!-- built by player.js --></div>
+      <div class="more-row">
+        <a class="btn btn-ghost" href="https://suno.com/@gamecat2300" target="_blank" rel="noopener">66 songs and counting — hear the rest on Suno ↗</a>
+      </div>
+    </section>
+
+    <section class="section section-about" id="about">
+      <div class="about-grid">
+        <div class="about-photo">
+          <img src="assets/avatar.jpeg" alt="Chemtrails" loading="lazy">
+        </div>
+        <div class="about-text">
+          <h2>About</h2>
+          <p>A West Coast musician and producer who records as Chemtrails — a solo project built on ambient texture, cinematic atmosphere, and the gray weight of Pacific Northwest fog.</p>
+          <p>Born on the Oregon coast, he picked up a trumpet at six and never really stopped chasing sound. His instincts formed early — shaped by the records that filled the rooms of his childhood, deepened by the rave and DJ culture of Portland and San Francisco, and refined across decades of band work, studio obsession, and an unrelenting appetite for what sound can do to a room.</p>
+          <p>He's moved through bands, genres, and roles — guitarist, then keyboardist and producer with Venus In Spurs, into the experimental rock terrain of Terra Firma — each chapter pushing further into the territory where performance bleeds into atmosphere.</p>
+          <p>As Chemtrails, the solo work resists easy classification: layered soundscapes built from keyboards, guitar, and ambient texture that feel less like songs and more like locations. Equal parts Pacific Northwest gloom, late-night studio instinct, and something faintly unsettling — like a place you've been but can't quite place.</p>
+          <p class="about-sig">Cinematic without the pretension. Ambient without the distance.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© 2026 Chemtrails</span>
+    <div class="footer-links">
+      <a href="https://suno.com/@gamecat2300" target="_blank" rel="noopener">Suno</a>
+    </div>
+  </footer>
+
+  <!-- player bar -->
+  <div class="player" id="player" hidden>
+    <img class="player-art" id="player-art" src="" alt="">
+    <div class="player-meta">
+      <span class="player-title" id="player-title"></span>
+      <span class="player-genre" id="player-genre"></span>
+    </div>
+    <div class="player-controls">
+      <button id="btn-prev" aria-label="Previous track">⏮</button>
+      <button id="btn-play" class="player-play" aria-label="Play / pause">▶</button>
+      <button id="btn-next" aria-label="Next track">⏭</button>
+    </div>
+    <div class="player-progress">
+      <span class="time" id="time-now">0:00</span>
+      <div class="progress-rail" id="progress-rail"><div class="progress-fill" id="progress-fill"></div></div>
+      <span class="time" id="time-total">–:––</span>
+    </div>
+    <audio id="audio" preload="none"></audio>
+  </div>
+
+  <script src="player.js"></script>
+</body>
+</html>
