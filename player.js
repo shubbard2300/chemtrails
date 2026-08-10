@@ -42,7 +42,7 @@ TRACKS.forEach((t, i) => {
       <div class="play-badge">▶</div>
     </div>
     <div class="track-info">
-      <div class="track-name">${t.title}</div>
+      <h3 class="track-name">${t.title}</h3>
       ${t.genre ? `<div class="track-genre">${t.genre}</div>` : ""}
     </div>`;
   card.addEventListener("click", () => (i === current ? toggle() : play(i)));
