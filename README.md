@@ -23,3 +23,16 @@ Static one-pager, deployed on Vercel at [chemtrails.vercel.app](https://chemtrai
 - `index.html` / `style.css` / `player.js` — no build step
 - Custom audio player streaming tracks from the Suno CDN
 - Full catalog: [suno.com/@gamecat2300](https://suno.com/@gamecat2300)
+
+## Syncing new tracks from Suno
+
+```bash
+python3 sync.py --push
+```
+
+Scrapes the Suno profile and adds any track newer than the newest one on the
+site — track entry in `player.js`, JSON-LD in `index.html`, `llms.txt`, cover
+art in `assets/` — then commits and pushes (Vercel deploys automatically).
+Existing entries are never touched, so manual curation survives. `--dry-run`
+previews; older tracks deliberately left off the site stay off (hard-block
+one forever via `EXCLUDE` in `sync.py`).
