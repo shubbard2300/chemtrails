@@ -2,6 +2,8 @@
 
 const TRACKS = [
   { id: "e386b415-6631-4db4-a7e0-5a2f223763ad", title: "Orbitz", genre: "Featured", art: "assets/orbitz.webp" },
+  { id: "0164fa0b-45b5-4136-92a5-eb1919fec7d8", title: "Electric Little Heart", genre: "Italian Disco", art: "assets/electric-little-heart.webp" },
+  { id: "06205005-1f23-4f39-baae-7cd7c256c170", title: "Paper Bag Teeth", genre: "Dark Electro Drum And Bass", art: "assets/paper-bag-teeth.webp" },
   { id: "c7a8cc47-2473-4f89-a687-080d9e71f0bd", title: "The World \"Jones\" Made", genre: "British 1980 Synth-Pop", art: "assets/jones.webp" },
   { id: "01450842-42c2-469d-b662-41d974601d05", title: "King Tides", genre: "Disco-Pop", art: "assets/king-tides.webp" },
   { id: "9c366f6b-951b-44e2-8e81-1770b89bf888", title: "Black Halo Signal", genre: "Trip-Hop", art: "assets/black-halo-signal.webp" },
