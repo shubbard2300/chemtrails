@@ -110,7 +110,7 @@
     </section>
 
     <section class="section" id="merch">
-      <a class="merch-cta" href="https://chemtrails-music.myspreadshop.com/" target="_blank" rel="noopener">
+      <a class="merch-cta" href="https://chemtrails-music.myspreadshop.com/?utm_source=chemtrails-music.com&utm_medium=merch-cta&utm_campaign=merch" target="_blank" rel="noopener">
         <div class="merch-thumbs" aria-hidden="true">
           <img src="assets/merch/ct-hoodie.webp" alt="" loading="lazy" decoding="async" width="160" height="160">
           <img src="assets/merch/owls-tee.webp" alt="" loading="lazy" decoding="async" width="160" height="160">
@@ -166,7 +166,7 @@
     <span>© 2026 Chemtrails</span>
     <div class="footer-links">
       <a href="https://suno.com/@gamecat2300" target="_blank" rel="noopener">Suno</a>
-      <a href="https://chemtrails-music.myspreadshop.com/" target="_blank" rel="noopener">Shop</a>
+      <a href="https://chemtrails-music.myspreadshop.com/?utm_source=chemtrails-music.com&utm_medium=footer&utm_campaign=merch" target="_blank" rel="noopener">Shop</a>
     </div>
   </footer>
 
@@ -206,6 +206,22 @@
       if (document.readyState === "complete") loadPayPal();
       else window.addEventListener("load", loadPayPal);
       setTimeout(loadPayPal, 4000); // safety net if load already fired or stalls
+    })();
+  </script>
+  <script>
+    // GA4 sales-funnel tracking: merch shop clicks + PayPal donate clicks
+    (function () {
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest && e.target.closest("a[href*='myspreadshop']");
+        if (a) {
+          var placement = a.closest("footer") ? "footer" : "merch-cta";
+          gtag("event", "merch_click", { shop: "spreadshop", placement: placement, link_url: a.href });
+          return;
+        }
+        if (e.target.closest && e.target.closest("#paypal-container-W5HUHU7FYFXY8")) {
+          gtag("event", "donate_click", { method: "paypal_hosted_button", placement: "support-section" });
+        }
+      }, true);
     })();
   </script>
 </body>
