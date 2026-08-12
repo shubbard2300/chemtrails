@@ -8,11 +8,19 @@ const TRACKS = [
   { id: "01450842-42c2-469d-b662-41d974601d05", title: "King Tides", genre: "Disco-Pop", art: "assets/king-tides.webp" },
   { id: "9c366f6b-951b-44e2-8e81-1770b89bf888", title: "Black Halo Signal", genre: "Trip-Hop", art: "assets/black-halo-signal.webp" },
   { id: "58b96d52-784f-46fc-8953-d5852c6ab7f4", title: "Coastal Cathedral", genre: "Disco", art: "assets/coastal-cathedral.webp" },
-  { id: "b23ad991-6f07-45dc-9fe3-ac81f9101733", title: "The Last Space Boat To Mars", genre: "Retro Orchestral Pop", art: "assets/space-boat.webp" },
   { id: "c950f9a1-ea0f-4c4b-b43e-944acfe18d25", title: "The Last Space Boat To Mars (Instrumental)", genre: "Retro Orchestral Pop", art: "assets/space-boat-instrumental.webp" },
+  { id: "b23ad991-6f07-45dc-9fe3-ac81f9101733", title: "The Last Space Boat To Mars", genre: "Retro Orchestral Pop", art: "assets/space-boat.webp" },
   { id: "29b38dd7-fa24-4880-963e-b2eb981b22b1", title: "Velvet Ferrari", genre: "Disco Rock", art: "assets/velvet-ferrari.webp" },
   { id: "0ae0553f-181c-4e66-a78e-62f894511678", title: "Black Cat", genre: "", art: "assets/black-cat.webp" },
   { id: "4cba3ba6-f7e5-4bb4-a421-d50d293eeb73", title: "The Creatures We Are All", genre: "", art: "assets/creatures.webp" },
+  { id: "f62a2b9f-57bd-44d3-b8df-809b108edfe0", title: "Tonight", genre: "", art: "assets/tonight.webp" },
+  { id: "97c390fc-8aeb-4ea1-ac0b-1de5b5176c9f", title: "Ride On Stella", genre: "1990s West Coast G-funk Hip-hop", art: "assets/ride-on-stella.webp" },
+  { id: "0609e47a-77cc-43a4-a636-aac0be1ce660", title: "Neon Shadows", genre: "ZZ Top Inspired Blues-rock", art: "assets/neon-shadows.webp" },
+  { id: "bb73ae97-0f8d-4818-972a-7834d2873c53", title: "This House Grows", genre: "Dark Dance-punk Fused", art: "assets/this-house-grows.webp" },
+  { id: "c0c44584-4b90-4ab3-a2f5-77bc2e282308", title: "Winstons & Indian Food", genre: "", art: "assets/winstons-indian-food.webp" },
+  { id: "8a267ad9-76ee-4454-8f18-b82646130c77", title: "Blue Line", genre: "Pop Ballad", art: "assets/blue-line.webp" },
+  { id: "70afc74e-e973-41c3-b542-62cfb41cafd6", title: "Last Motel on Earth", genre: "", art: "assets/last-motel-on-earth.webp" },
+  { id: "12cc0489-ee5e-4c0d-81e7-0f884f1715dd", title: "Dust on My Boots", genre: "", art: "assets/dust-on-my-boots.webp" },
 ];
 
 const audioUrl = (t) => `https://cdn1.suno.ai/${t.id}.mp3`;
