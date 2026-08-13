@@ -270,12 +270,106 @@ body {
   margin: 0 auto !important;
 }
 
-/* support — tip jar */
+/* support — broadcast console */
 .section-support { text-align: center; }
-.support-inner { max-width: 520px; margin: 0 auto; }
-.support-inner h2 { margin-bottom: 16px; }
-.support-inner p { color: var(--fog); margin-bottom: 30px; }
+.support-console {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 46px 40px 38px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background:
+    radial-gradient(ellipse 85% 60% at 50% 0%, rgba(240,163,94,0.08), transparent 65%),
+    var(--bg-2);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+.onair {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 7px 16px;
+  border: 1px solid rgba(240,163,94,0.35);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 11.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.onair-lamp {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(240,163,94,0.9);
+  animation: onair 1.6s ease-in-out infinite;
+}
+@keyframes onair { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+.support-console h2 { margin-bottom: 14px; }
+.support-copy { color: var(--fog); max-width: 470px; margin: 0 auto 28px; }
+.eq {
+  display: flex; gap: 5px;
+  justify-content: center; align-items: flex-end;
+  height: 34px;
+  margin-bottom: 30px;
+}
+.eq span {
+  width: 5px; height: 100%;
+  border-radius: 3px;
+  background: var(--accent);
+  opacity: 0.85;
+  transform-origin: bottom;
+  animation: eq 1.1s ease-in-out infinite;
+}
+.eq span:nth-child(1) { animation-delay: 0.00s; animation-duration: 0.9s; }
+.eq span:nth-child(2) { animation-delay: 0.15s; animation-duration: 1.2s; }
+.eq span:nth-child(3) { animation-delay: 0.30s; animation-duration: 0.8s; }
+.eq span:nth-child(4) { animation-delay: 0.05s; animation-duration: 1.05s; }
+.eq span:nth-child(5) { animation-delay: 0.25s; animation-duration: 0.95s; }
+.eq span:nth-child(6) { animation-delay: 0.10s; animation-duration: 1.15s; }
+.eq span:nth-child(7) { animation-delay: 0.20s; animation-duration: 0.85s; }
+@keyframes eq { 0%, 100% { transform: scaleY(0.25); } 50% { transform: scaleY(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .eq span, .onair-lamp { animation: none; }
+  .eq span { transform: scaleY(0.6); }
+}
+.support-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+.tier {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 16px;
+  background: rgba(10,12,16,0.5);
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.tier:hover {
+  border-color: rgba(240,163,94,0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+.tier-icon { font-size: 22px; display: block; }
+.tier-amt {
+  font-family: var(--display);
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 700;
+  display: block;
+  margin: 10px 0 6px;
+}
+.tier-desc { color: var(--fog-dim); font-size: 13.5px; line-height: 1.55; display: block; }
+.tier-desc em { color: var(--fog); font-style: italic; }
 .paypal-slot { max-width: 340px; margin: 0 auto; }
+.support-fine {
+  color: var(--fog-dim);
+  font-size: 13px;
+  margin-top: 24px;
+  font-style: italic;
+}
+@media (max-width: 700px) {
+  .support-console { padding: 36px 22px 32px; }
+  .support-tiers { grid-template-columns: 1fr; }
+}
 
 /* about */
 .section-about { padding-bottom: 110px; }
@@ -285,10 +379,15 @@ body {
   gap: 56px;
   align-items: start;
 }
+.about-photo { display: flex; justify-content: center; }
 .about-photo img {
-  width: 100%; border-radius: 14px;
+  width: 100%; max-width: 300px;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
   filter: saturate(0.8);
-  border: 1px solid var(--line);
+  border: 1px solid rgba(240,163,94,0.35);
+  box-shadow: 0 0 70px rgba(240,163,94,0.12), 0 18px 44px rgba(0,0,0,0.45);
 }
 .about-text p { color: var(--fog); margin-bottom: 18px; max-width: 620px; }
 .about-text h2 { margin-bottom: 26px; }
