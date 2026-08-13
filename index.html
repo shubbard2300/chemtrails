@@ -75,7 +75,7 @@
   <link rel="preconnect" href="https://cdn1.suno.ai">
   <link rel="preload" as="image" href="assets/banner.webp" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;700;900&family=Space+Grotesk:wght@300;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
 
@@ -155,21 +155,24 @@
         <p class="support-copy">Chemtrails broadcasts from a fog-locked studio on the Oregon coast — no label, no ads, no algorithm. Just signal. If a track ever found you at the right moment, send a little power back up the tower.</p>
         <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <div class="support-tiers">
-          <div class="tier">
+          <a class="tier" href="https://www.paypal.com/ncp/payment/W5HUHU7FYFXY8" target="_blank" rel="noopener" data-tier="5">
             <span class="tier-icon">☕</span>
             <span class="tier-amt">$5</span>
             <span class="tier-desc">Late-night studio coffee. The 3&nbsp;a.m. mixes don't mix themselves.</span>
-          </div>
-          <div class="tier">
+            <span class="tier-cta">Send it ↗</span>
+          </a>
+          <a class="tier" href="https://www.paypal.com/ncp/payment/W5HUHU7FYFXY8" target="_blank" rel="noopener" data-tier="15">
             <span class="tier-icon">📡</span>
             <span class="tier-amt">$15</span>
             <span class="tier-desc">A month of antenna maintenance. Keeps the signal clear through the fog.</span>
-          </div>
-          <div class="tier">
+            <span class="tier-cta">Send it ↗</span>
+          </a>
+          <a class="tier" href="https://www.paypal.com/ncp/payment/W5HUHU7FYFXY8" target="_blank" rel="noopener" data-tier="50">
             <span class="tier-icon">🛸</span>
             <span class="tier-amt">$50</span>
             <span class="tier-desc">Classified. We could tell you, but then the transmission would find <em>you</em>.</span>
-          </div>
+            <span class="tier-cta">Send it ↗</span>
+          </a>
         </div>
         <div id="paypal-container-W5HUHU7FYFXY8" class="paypal-slot"></div>
         <p class="support-fine">The transmissions continue either way. But the fog machine isn't free.</p>
@@ -247,6 +250,11 @@
         if (a) {
           var placement = a.closest("footer") ? "footer" : "merch-cta";
           gtag("event", "merch_click", { shop: "spreadshop", placement: placement, link_url: a.href });
+          return;
+        }
+        var tier = e.target.closest && e.target.closest(".tier");
+        if (tier) {
+          gtag("event", "donate_click", { method: "paypal_ncp_link", placement: "support-tier", tier: tier.dataset.tier });
           return;
         }
         if (e.target.closest && e.target.closest("#paypal-container-W5HUHU7FYFXY8")) {
