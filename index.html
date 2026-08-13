@@ -75,7 +75,7 @@
   <link rel="preconnect" href="https://cdn1.suno.ai">
   <link rel="preload" as="image" href="assets/banner.webp" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;700;900&family=Space+Grotesk:wght@300;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 
@@ -127,8 +127,10 @@
           <img src="assets/merch/ct-mug.webp" alt="" loading="lazy" decoding="async" width="160" height="160">
         </div>
         <div class="merch-cta-copy">
+          <span class="merch-kicker">Official Chemtrails Merch</span>
           <h2>Wearable transmissions</h2>
-          <p>Hoodies, tees, mugs, and stickers from the Chemtrails universe — printed on demand, shipped worldwide.</p>
+          <p>Hoodies, tees, mugs, and stickers from the Chemtrails universe — printed on demand, shipped worldwide. Every order goes straight into recording time and keeping the gear alive.</p>
+          <p class="merch-perk">🛰️ Wear the signal · ☕ Sip the signal · 💾 Stick the signal</p>
         </div>
         <span class="btn btn-primary merch-cta-btn">Visit the shop&nbsp;↗</span>
       </a>
@@ -152,7 +154,8 @@
       <div class="support-console">
         <div class="onair"><span class="onair-lamp" aria-hidden="true"></span>On Air · Listener-Powered</div>
         <h2>Fuel the Transmissions</h2>
-        <p class="support-copy">Chemtrails broadcasts from a fog-locked studio on the Oregon coast — no label, no ads, no algorithm. Just signal. If a track ever found you at the right moment, send a little power back up the tower.</p>
+        <p class="support-copy">Chemtrails is a solo project — one person, a guitar, a keyboard, and a lot of Pacific Northwest weather. No label, no distributor cut, no ad revenue. Songs like <em>"Oregon Coast Medical Supply,"</em> <em>"Foghorn Stethoscope,"</em> and <em>"She Comes Back As Weather"</em> exist because they got made, not because anyone funded them.</p>
+        <p class="support-copy">If something here stuck with you, the tip jar is below. It goes to recording time, gear that hasn't died yet, and getting the next record out.</p>
         <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <div class="support-tiers">
           <a class="tier" href="https://www.paypal.com/ncp/payment/W5HUHU7FYFXY8" target="_blank" rel="noopener" data-tier="5">
@@ -175,7 +178,11 @@
           </a>
         </div>
         <div id="paypal-container-W5HUHU7FYFXY8" class="paypal-slot"></div>
-        <p class="support-fine">The transmissions continue either way. But the fog machine isn't free.</p>
+        <a class="support-alt" href="https://chemtrails-music.myspreadshop.com/?utm_source=chemtrails-music.com&utm_medium=support-alt&utm_campaign=merch" target="_blank" rel="noopener">
+          <span class="support-alt-kicker">Rather get something for it?</span>
+          <span class="support-alt-line">The shop fuels the same tank — except you also get a hoodie. Browse the merch ↗</span>
+        </a>
+        <p class="support-fine">Not into PayPal? Streaming still helps — so does telling one person about it. The transmissions continue either way. But the fog machine isn't free.</p>
       </div>
     </section>
 
@@ -248,7 +255,7 @@
       document.addEventListener("click", function (e) {
         var a = e.target.closest && e.target.closest("a[href*='myspreadshop']");
         if (a) {
-          var placement = a.closest("footer") ? "footer" : "merch-cta";
+          var placement = a.closest("footer") ? "footer" : (a.closest("#support") ? "support-alt" : "merch-cta");
           gtag("event", "merch_click", { shop: "spreadshop", placement: placement, link_url: a.href });
           return;
         }
