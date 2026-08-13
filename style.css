@@ -17,6 +17,13 @@
 
 html { scroll-behavior: smooth; }
 
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.track-card:focus-visible { outline-offset: 0; border-radius: 14px; }
+
 body {
   background: var(--bg);
   color: var(--ink);
@@ -347,8 +354,10 @@ body {
 .eq span:nth-child(7) { animation-delay: 0.20s; animation-duration: 0.85s; }
 @keyframes eq { 0%, 100% { transform: scaleY(0.25); } 50% { transform: scaleY(1); } }
 @media (prefers-reduced-motion: reduce) {
-  .eq span, .onair-lamp { animation: none; }
+  .eq span, .onair-lamp, .grain, .hero-scroll { animation: none; }
   .eq span { transform: scaleY(0.6); }
+  html { scroll-behavior: auto; }
+  .track-card, .tier, .merch-thumbs img, .btn { transition: none; }
 }
 .support-tiers {
   display: grid;

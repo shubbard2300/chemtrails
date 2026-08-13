@@ -46,6 +46,9 @@ TRACKS.forEach((t, i) => {
   const card = document.createElement("article");
   card.className = "track-card";
   card.dataset.index = i;
+  card.tabIndex = 0;
+  card.setAttribute("role", "button");
+  card.setAttribute("aria-label", `Play ${t.title}`);
   card.innerHTML = `
     <div class="track-art">
       <img src="${t.art}" alt="${t.title} artwork" loading="lazy" decoding="async" width="640" height="640">
@@ -55,7 +58,14 @@ TRACKS.forEach((t, i) => {
       <h3 class="track-name">${t.title}</h3>
       ${t.genre ? `<div class="track-genre">${t.genre}</div>` : ""}
     </div>`;
-  card.addEventListener("click", () => (i === current ? toggle() : play(i)));
+  const activate = () => (i === current ? toggle() : play(i));
+  card.addEventListener("click", activate);
+  card.addEventListener("keydown", (e) => {
+    if (e.code === "Enter" || e.code === "Space") {
+      e.preventDefault();
+      activate();
+    }
+  });
   grid.appendChild(card);
 });
 
@@ -68,11 +78,27 @@ function play(i) {
   playerArt.src = t.art;
   playerTitle.textContent = t.title;
   playerGenre.textContent = t.genre || "Chemtrails";
+  document.title = `▶ ${t.title} — CHEMTRAILS`;
   document.querySelectorAll(".track-card").forEach((c) => {
     const playing = Number(c.dataset.index) === i;
     c.classList.toggle("playing", playing);
     c.querySelector(".play-badge").textContent = playing ? "❚❚" : "▶";
   });
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: t.title,
+      artist: "Chemtrails",
+      album: t.genre || "Transmissions",
+      artwork: [{ src: t.art, sizes: "640x640", type: "image/webp" }],
+    });
+  }
+}
+
+if ("mediaSession" in navigator) {
+  navigator.mediaSession.setActionHandler("play", () => audio.play());
+  navigator.mediaSession.setActionHandler("pause", () => audio.pause());
+  navigator.mediaSession.setActionHandler("previoustrack", () => play((current - 1 + TRACKS.length) % TRACKS.length));
+  navigator.mediaSession.setActionHandler("nexttrack", () => play((current + 1) % TRACKS.length));
 }
 
 function toggle() {
