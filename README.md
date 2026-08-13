@@ -30,9 +30,22 @@ Static one-pager, deployed on Vercel at [chemtrails.vercel.app](https://chemtrai
 python3 sync.py --push
 ```
 
-Scrapes the Suno profile and adds any track newer than the newest one on the
-site — track entry in `player.js`, JSON-LD in `index.html`, `llms.txt`, cover
-art in `assets/` — then commits and pushes (Vercel deploys automatically).
-Existing entries are never touched, so manual curation survives. `--dry-run`
-previews; older tracks deliberately left off the site stay off (hard-block
-one forever via `EXCLUDE` in `sync.py`).
+Scrapes the Suno profile's public Songs feed and adds every track not already
+on the site, and re-downloads cover art whenever it changes on Suno
+(tracked in `sync-state.json`). Regenerates `player.js`, the JSON-LD in
+`index.html`, `llms.txt`, and `sitemap.xml`, then commits and pushes (Vercel
+deploys automatically). Existing entries are never edited, so manual titles
+and genres survive. `--dry-run` previews; block a song forever via `EXCLUDE`
+in `sync.py`.
+
+Runs automatically every 6 hours via launchd
+(`com.hailie.chemtrails-sync.plist`, installed in `~/Library/LaunchAgents/`,
+logs to `~/Library/Logs/chemtrails-sync.log`). Reinstall after editing:
+
+```bash
+cp com.hailie.chemtrails-sync.plist ~/Library/LaunchAgents/ && launchctl bootout gui/501/com.hailie.chemtrails-sync; launchctl bootstrap gui/501 ~/Library/LaunchAgents/com.hailie.chemtrails-sync.plist
+```
+
+Note: the profile only exposes the 20 newest public songs to anonymous
+visitors — tracks made public later are picked up on future syncs, and
+nothing is ever removed from the site.

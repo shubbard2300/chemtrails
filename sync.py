@@ -1,21 +1,26 @@
 #!/usr/bin/env python3
-"""Sync the site's track list with the Suno profile (suno.com/@gamecat2300).
+"""Sync the site's track list and artwork with the Suno profile.
 
-Scrapes the profile page's embedded "Songs" feed and adds any track NEWER
-than the newest track already on the site. Existing entries are never edited
-or removed, so manual curation (custom titles, genres, art, excluded older
-tracks) survives every run. Updates:
+Scrapes the profile page's embedded "Songs" feed (suno.com/@gamecat2300 —
+everything Suno exposes publicly, currently the 20 newest) and:
 
-  - player.js   TRACKS array (new entries prepended after the Featured track)
+  - adds every public track not already on the site
+  - refreshes cover art for existing tracks when it changed on Suno
+    (source image URLs are remembered in sync-state.json)
+
+Existing track entries are never edited or removed, so manual curation
+(custom titles, genres, art filenames) survives every run. Regenerates:
+
+  - player.js   TRACKS array
   - index.html  JSON-LD MusicRecording ItemList
   - llms.txt    "Featured tracks" line
   - sitemap.xml <lastmod>
-  - assets/     cover art, downloaded and converted to 640px webp (cwebp)
+  - assets/     cover art, 640px webp via cwebp
 
 Usage:
   python3 sync.py            # sync + git commit if anything changed
   python3 sync.py --dry-run  # show what would change, touch nothing
-  python3 sync.py --push     # sync + commit + git push (deploys via Vercel)
+  python3 sync.py --push     # sync + commit + git push (Vercel deploys)
 
 To keep a song off the site permanently, add its id to EXCLUDE below.
 """
@@ -34,6 +39,7 @@ USER_AGENT = (
 )
 CWEBP = "/opt/homebrew/bin/cwebp"
 ROOT = Path(__file__).resolve().parent
+STATE_PATH = ROOT / "sync-state.json"
 
 # Song ids that must never be auto-added.
 EXCLUDE: set[str] = set()
@@ -62,7 +68,7 @@ def fetch_profile():
 
 
 def parse_songs_feed(html):
-    """Return the profile's Songs feed, newest first."""
+    """Return the profile's public Songs feed, newest first."""
     un = html.replace('\\"', '"')
     i = un.find('"feed_title":"Songs"')
     if i == -1:
@@ -78,21 +84,18 @@ def parse_songs_feed(html):
                 break
     arr = un[k : m + 1]
     songs = []
-    chunks = re.split(r'"content_id":"', arr)[1:]
-    for chunk in chunks:
+    for chunk in re.split(r'"content_id":"', arr)[1:]:
         sid = chunk[:36]
         if not re.fullmatch(r"[0-9a-f-]{36}", sid):
             continue
         title = re.search(r'"title":"(.*?)","play_count"', chunk)
-        created = re.search(r'"created_at":"(.*?)"', chunk)
         img = re.search(r'"image_large_url":"(https://[^"]+)"', chunk)
         tags = re.search(r'"tags":"(.*?)","prompt"', chunk)
-        if not (title and created):
+        if not title:
             continue
         songs.append({
             "id": sid,
             "title": unescape_title(title.group(1)),
-            "created_at": created.group(1),
             "image_url": img.group(1) if img else None,
             "tags": unescape_title(tags.group(1)) if tags else "",
         })
@@ -133,21 +136,23 @@ def parse_tracks(player_src):
     return entries
 
 
-def download_art(song, slug):
-    dest = ROOT / "assets" / f"{slug}.webp"
-    if dest.exists():
-        return f"assets/{slug}.webp"
-    if not song["image_url"]:
-        return "assets/avatar.webp"
-    tmp = ROOT / "assets" / f".{slug}.tmp.jpeg"
+def art_path_of(line):
+    m = re.search(r'art:\s*"([^"]+)"', line)
+    return m.group(1) if m else None
+
+
+def download_art(image_url, rel_path, label):
+    """Download + convert cover art, overwriting rel_path. True on success."""
+    dest = ROOT / rel_path
+    tmp = ROOT / "assets" / ".art.tmp.jpeg"
     r = subprocess.run(
         ["curl", "-s", "--max-time", "30", "-A", USER_AGENT,
-         song["image_url"], "-o", str(tmp)],
+         image_url, "-o", str(tmp)],
         capture_output=True,
     )
     if r.returncode != 0 or not tmp.exists() or tmp.stat().st_size < 1000:
         tmp.unlink(missing_ok=True)
-        die(f"failed to download art for {song['title']}")
+        die(f"failed to download art for {label}")
     r = subprocess.run(
         [CWEBP, "-quiet", "-q", "82", "-resize", "640", "640",
          str(tmp), "-o", str(dest)],
@@ -155,8 +160,7 @@ def download_art(song, slug):
     )
     tmp.unlink(missing_ok=True)
     if r.returncode != 0 or not dest.exists():
-        die(f"cwebp failed for {song['title']}: {r.stderr.decode()[:200]}")
-    return f"assets/{slug}.webp"
+        die(f"cwebp failed for {label}: {r.stderr.decode()[:200]}")
 
 
 def main():
@@ -167,53 +171,66 @@ def main():
 
     player_src = player_path.read_text()
     existing = parse_tracks(player_src)
-    known_ids = {sid for sid, _ in existing}
+    known = dict(existing)
 
     songs = parse_songs_feed(fetch_profile())
-    by_id = {s["id"]: s for s in songs}
+    state = json.loads(STATE_PATH.read_text()) if STATE_PATH.exists() else {}
 
-    known_dates = [by_id[sid]["created_at"] for sid in known_ids if sid in by_id]
-    if not known_dates:
-        die("none of the site's tracks appear in the Suno Songs feed — refusing to guess")
-    cutoff = max(known_dates)
-
-    new_songs = [
+    new_songs = [s for s in songs if s["id"] not in known and s["id"] not in EXCLUDE]
+    stale_art = [
         s for s in songs
-        if s["id"] not in known_ids and s["id"] not in EXCLUDE
-        and s["created_at"] > cutoff
-    ]
-    skipped_old = [
-        s for s in songs
-        if s["id"] not in known_ids and s["id"] not in EXCLUDE
-        and s["created_at"] <= cutoff
+        if s["id"] in known and s["image_url"]
+        and state.get(s["id"]) != s["image_url"]
     ]
 
-    if skipped_old:
-        names = ", ".join(s["title"] for s in skipped_old)
-        print(f"leaving off {len(skipped_old)} pre-existing uncurated track(s): {names}")
-    if not new_songs:
-        print("in sync — no new tracks on Suno")
+    if not new_songs and not stale_art:
+        print("in sync — no new tracks, artwork current")
         return
-    print(f"{len(new_songs)} new track(s): " + ", ".join(s["title"] for s in new_songs))
+    if new_songs:
+        print(f"{len(new_songs)} new track(s): " + ", ".join(s["title"] for s in new_songs))
+    if stale_art:
+        print(f"refreshing artwork for {len(stale_art)} track(s): "
+              + ", ".join(s["title"] for s in stale_art))
     if DRY_RUN:
         return
 
-    # oldest-first so each prepend keeps newest at the top
-    new_lines = []
-    for s in new_songs:
-        slug = slugify(s["title"])
-        art = download_art(s, slug)
-        genre = genre_from_tags(s["tags"])
-        entry = ("{ id: %s, title: %s, genre: %s, art: %s },") % (
-            json.dumps(s["id"]), json.dumps(s["title"]),
-            json.dumps(genre), json.dumps(art),
-        )
-        new_lines.append((s["id"], entry))
+    changed_assets = []
 
-    # final order: Featured entry first, then new (newest first), then the rest
+    for s in stale_art:
+        rel = art_path_of(known[s["id"]])
+        if rel:
+            download_art(s["image_url"], rel, s["title"])
+            changed_assets.append(rel)
+        state[s["id"]] = s["image_url"]
+
+    new_lines = {}
+    for s in new_songs:
+        rel = f"assets/{slugify(s['title'])}.webp"
+        if s["image_url"]:
+            download_art(s["image_url"], rel, s["title"])
+            state[s["id"]] = s["image_url"]
+            changed_assets.append(rel)
+        else:
+            rel = "assets/avatar.webp"
+        new_lines[s["id"]] = ('{ id: %s, title: %s, genre: %s, art: %s },') % (
+            json.dumps(s["id"]), json.dumps(s["title"]),
+            json.dumps(genre_from_tags(s["tags"])), json.dumps(rel),
+        )
+
+    # final order: Featured entry first, then feed order (newest first),
+    # then site tracks no longer in the public feed
     featured = [e for e in existing if '"Featured"' in e[1]][:1]
-    rest = [e for e in existing if e not in featured]
-    final = featured + new_lines + rest
+    featured_ids = {sid for sid, _ in featured}
+    feed_part = [
+        (s["id"], new_lines.get(s["id"], known.get(s["id"])))
+        for s in songs
+        if s["id"] not in featured_ids and (s["id"] in known or s["id"] in new_lines)
+    ]
+    feed_ids = {sid for sid, _ in feed_part}
+    leftovers = [
+        e for e in existing if e[0] not in feed_ids and e[0] not in featured_ids
+    ]
+    final = featured + feed_part + leftovers
 
     body = "\n".join(f"  {line}" for _, line in final)
     player_src = re.sub(
@@ -223,7 +240,6 @@ def main():
     )
     player_path.write_text(player_src)
 
-    # titles for JSON-LD / llms.txt come from the regenerated entries
     titles = []
     for sid, line in final:
         tm = re.search(r'title:\s*("(?:[^"\\]|\\.)*")', line)
@@ -263,16 +279,31 @@ def main():
         re.sub(r"<lastmod>.*?</lastmod>", f"<lastmod>{today}</lastmod>",
                sitemap_path.read_text())
     )
+    STATE_PATH.write_text(json.dumps(state, indent=2) + "\n")
 
-    names = ", ".join(s["title"] for s in new_songs)
-    subprocess.run(["git", "-C", str(ROOT), "add", "-A"], check=True)
-    subprocess.run(
-        ["git", "-C", str(ROOT), "commit", "-m",
-         f"Sync from Suno: add {names}"],
-        check=True,
+    parts = []
+    if new_songs:
+        parts.append("add " + ", ".join(s["title"] for s in new_songs))
+    if stale_art:
+        parts.append(f"refresh art x{len(stale_art)}")
+    msg = "Sync from Suno: " + "; ".join(parts)
+
+    touched = ["player.js", "index.html", "llms.txt", "sitemap.xml",
+               "sync-state.json"] + changed_assets
+    subprocess.run(["git", "-C", str(ROOT), "add", "--"] + touched, check=True)
+    r = subprocess.run(
+        ["git", "-C", str(ROOT), "diff", "--cached", "--quiet"], cwd=ROOT
     )
-    print(f"committed: {names}")
+    if r.returncode == 0:
+        print("nothing actually changed after regeneration")
+        return
+    subprocess.run(["git", "-C", str(ROOT), "commit", "-m", msg], check=True)
+    print(f"committed: {msg}")
     if PUSH:
+        subprocess.run(
+            ["git", "-C", str(ROOT), "pull", "--rebase", "--autostash"],
+            check=True,
+        )
         subprocess.run(["git", "-C", str(ROOT), "push"], check=True)
         print("pushed — Vercel will deploy")
 
