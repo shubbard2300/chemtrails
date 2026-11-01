@@ -13,9 +13,9 @@
       ]
     },
     {
-      "source": "/player.js",
+      "source": "/site.js",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=600, stale-while-revalidate=3600" }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
   ]

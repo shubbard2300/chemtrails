@@ -18,34 +18,21 @@ Every record is a fragment of a larger story.
 
 ## The site
 
-Static one-pager, deployed on Vercel at [chemtrails.vercel.app](https://chemtrails.vercel.app/).
+Static site on Vercel at [chemtrails-music.com](https://www.chemtrails-music.com/). Redesigned 2026-11-01: a title-sequence look (Techniscope letterbox bars, 1960s-70s Italian space-age colour, spaghetti-western dusk, layered parallax). **Audio plays from SoundCloud**: six records, each a SoundCloud set, driven by a custom player over SoundCloud's Widget API. Suno songs show as a Singles shelf linking to their Suno pages (Suno's audio CDN went private, so they cannot play in-page).
 
-- `index.html` / `style.css` / `player.js` — no build step
-- Custom audio player streaming tracks from the Suno CDN
-- Full catalog: [suno.com/@gamecat2300](https://suno.com/@gamecat2300)
+- `content/records.json` is the content: six records (title, colour, SoundCloud set URL, track list, liner notes) and the singles. Edit it, then `node build.mjs`
+- `build.mjs` generates `index.html`, `records/<slug>/index.html`, `sitemap.xml` and `llms.txt`. Never hand-edit those
+- `style.css` and `site.js` are hand-written (parallax, player, analytics, PayPal)
+- Full catalog: [soundcloud.com/chemtrails](https://soundcloud.com/chemtrails) and [suno.com/@gamecat2300](https://suno.com/@gamecat2300)
 
-## Syncing new tracks from Suno
+## Adding a record
+
+Add an entry to `records` in `content/records.json` (slug, title, `sc` set URL, `tracks` as `[title, "/chemtrails/<track-slug>"]` in set order, a `wash` colour), put its cover through `cwebp` as `assets/records/<slug>.webp` (1200px), `<slug>-thumb.webp` (480px) and `<slug>-wash.webp` (48px), run `node build.mjs`, push.
+
+## Syncing Suno singles
 
 ```bash
 python3 sync.py --push
 ```
 
-Scrapes the Suno profile's public Songs feed and adds every track not already
-on the site, and re-downloads cover art whenever it changes on Suno
-(tracked in `sync-state.json`). Regenerates `player.js`, the JSON-LD in
-`index.html`, `llms.txt`, and `sitemap.xml`, then commits and pushes (Vercel
-deploys automatically). Existing entries are never edited, so manual titles
-and genres survive. `--dry-run` previews; block a song forever via `EXCLUDE`
-in `sync.py`.
-
-Runs automatically every 6 hours via launchd
-(`com.hailie.chemtrails-sync.plist`, installed in `~/Library/LaunchAgents/`,
-logs to `~/Library/Logs/chemtrails-sync.log`). Reinstall after editing:
-
-```bash
-cp com.hailie.chemtrails-sync.plist ~/Library/LaunchAgents/ && launchctl bootout gui/501/com.hailie.chemtrails-sync; launchctl bootstrap gui/501 ~/Library/LaunchAgents/com.hailie.chemtrails-sync.plist
-```
-
-Note: the profile only exposes the 20 newest public songs to anonymous
-visitors — tracks made public later are picked up on future syncs, and
-nothing is ever removed from the site.
+Adds public Suno songs missing from `singles` in `records.json`, refreshes changed cover art, runs the build, commits, and pushes. Runs every 6 hours via launchd (`com.hailie.chemtrails-sync.plist`, logs to `~/Library/Logs/chemtrails-sync.log`). **Paused 2026-11-01 by a `.paused` file** in this folder (the job exits at once while it exists; delete it to resume). Once the Suno tracks live in a SoundCloud set, put that URL in `singles.sc` and the cards become playable; the sync is then redundant.
