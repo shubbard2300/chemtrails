@@ -1,5 +1,9 @@
 /* CHEMTRAILS — title sequence: Techniscope bars, Italian space-age colour, spaghetti-western dusk */
 
+/* self-hosted (Latin subset of Google's Anton v27 and Space Grotesk v22 variable); the arrows and player glyphs come from system fonts */
+@font-face { font-family: "Anton"; font-style: normal; font-weight: 400; font-display: swap; src: url(/assets/fonts/anton-latin.woff2) format("woff2"); }
+@font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 300 700; font-display: swap; src: url(/assets/fonts/space-grotesk-latin.woff2) format("woff2"); }
+
 :root {
   --ink: #0d0907;
   --ink-2: #17100c;
