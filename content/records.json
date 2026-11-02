@@ -380,49 +380,31 @@
   }
  ],
  "singles": {
-  "sc": null,
+  "sc": "https://soundcloud.com/chemtrails/sets/loose-transmissions",
   "tracks": [
    {
-    "id": "e386b415-6631-4db4-a7e0-5a2f223763ad",
-    "title": "Orbitz",
-    "genre": "Featured",
-    "art": "assets/orbitz.webp"
+    "id": "f0d0d688-fc71-4fe3-bb8a-042dee853f74",
+    "title": "Joaquin's March",
+    "genre": "",
+    "art": "assets/joaquin-s-march.webp"
    },
    {
-    "id": "bdef8bee-a5af-4353-96d8-6fdaa9bcc4b2",
-    "title": "Don't Look Back Tonight",
-    "genre": "Trip Hop",
-    "art": "assets/don-t-look-back-tonight.webp"
+    "id": "a2a52a57-0d12-42b1-bd2a-be05187e5e88",
+    "title": "Match Book Saint",
+    "genre": "",
+    "art": "assets/match-book-saint.webp"
    },
    {
-    "id": "0164fa0b-45b5-4136-92a5-eb1919fec7d8",
-    "title": "Electric Little Heart",
-    "genre": "Italian Disco",
-    "art": "assets/electric-little-heart.webp"
+    "id": "d4c5e889-70cd-42c5-a002-9605b8ffa9d1",
+    "title": "Starry Eyes",
+    "genre": "",
+    "art": "assets/starry-eyes.webp"
    },
    {
-    "id": "06205005-1f23-4f39-baae-7cd7c256c170",
-    "title": "Paper Bag Teeth",
-    "genre": "Dark Electro Drum And Bass",
-    "art": "assets/paper-bag-teeth.webp"
-   },
-   {
-    "id": "c7a8cc47-2473-4f89-a687-080d9e71f0bd",
-    "title": "The World \"Jones\" Made",
-    "genre": "British 1980 Synth-Pop",
-    "art": "assets/jones.webp"
-   },
-   {
-    "id": "01450842-42c2-469d-b662-41d974601d05",
-    "title": "King Tides",
-    "genre": "Disco-Pop",
-    "art": "assets/king-tides.webp"
-   },
-   {
-    "id": "9c366f6b-951b-44e2-8e81-1770b89bf888",
-    "title": "Black Halo Signal",
-    "genre": "Trip-Hop",
-    "art": "assets/black-halo-signal.webp"
+    "id": "ff90fe16-c008-415a-b1b3-81588649a836",
+    "title": "Grief in Sequins",
+    "genre": "",
+    "art": "assets/grief-in-sequins.webp"
    },
    {
     "id": "58b96d52-784f-46fc-8953-d5852c6ab7f4",
@@ -431,46 +413,10 @@
     "art": "assets/coastal-cathedral.webp"
    },
    {
-    "id": "c950f9a1-ea0f-4c4b-b43e-944acfe18d25",
-    "title": "The Last Space Boat To Mars (Instrumental)",
-    "genre": "Retro Orchestral Pop",
-    "art": "assets/space-boat-instrumental.webp"
-   },
-   {
-    "id": "b23ad991-6f07-45dc-9fe3-ac81f9101733",
-    "title": "The Last Space Boat To Mars",
-    "genre": "Retro Orchestral Pop",
-    "art": "assets/space-boat.webp"
-   },
-   {
-    "id": "29b38dd7-fa24-4880-963e-b2eb981b22b1",
-    "title": "Velvet Ferrari",
-    "genre": "Disco Rock",
-    "art": "assets/velvet-ferrari.webp"
-   },
-   {
-    "id": "0ae0553f-181c-4e66-a78e-62f894511678",
-    "title": "Black Cat",
-    "genre": "",
-    "art": "assets/black-cat.webp"
-   },
-   {
-    "id": "4cba3ba6-f7e5-4bb4-a421-d50d293eeb73",
-    "title": "The Creatures We Are All",
-    "genre": "",
-    "art": "assets/creatures.webp"
-   },
-   {
-    "id": "f62a2b9f-57bd-44d3-b8df-809b108edfe0",
-    "title": "Tonight",
-    "genre": "",
-    "art": "assets/tonight.webp"
-   },
-   {
-    "id": "97c390fc-8aeb-4ea1-ac0b-1de5b5176c9f",
-    "title": "Ride On Stella",
-    "genre": "1990s West Coast G-funk Hip-hop",
-    "art": "assets/ride-on-stella.webp"
+    "id": "01450842-42c2-469d-b662-41d974601d05",
+    "title": "King Tides",
+    "genre": "Disco-Pop",
+    "art": "assets/king-tides.webp"
    },
    {
     "id": "0609e47a-77cc-43a4-a636-aac0be1ce660",
@@ -479,22 +425,22 @@
     "art": "assets/neon-shadows.webp"
    },
    {
-    "id": "bb73ae97-0f8d-4818-972a-7834d2873c53",
-    "title": "This House Grows",
-    "genre": "Dark Dance-punk Fused",
-    "art": "assets/this-house-grows.webp"
-   },
-   {
-    "id": "c0c44584-4b90-4ab3-a2f5-77bc2e282308",
-    "title": "Winstons & Indian Food",
+    "id": "d0a2db3f-b6e6-45a3-bbd7-e342446c5cd2",
+    "title": "Silk, Smoke & Wishes",
     "genre": "",
-    "art": "assets/winstons-indian-food.webp"
+    "art": "assets/silk-smoke-wishes.webp"
    },
    {
-    "id": "8a267ad9-76ee-4454-8f18-b82646130c77",
-    "title": "Blue Line",
-    "genre": "Pop Ballad",
-    "art": "assets/blue-line.webp"
+    "id": "373efa85-0969-4cfd-80f6-7a1e2c9d3484",
+    "title": "Blue Eyes of Gold",
+    "genre": "",
+    "art": "assets/blue-eyes-of-gold.webp"
+   },
+   {
+    "id": "4cba3ba6-f7e5-4bb4-a421-d50d293eeb73",
+    "title": "The Creatures We Are All",
+    "genre": "",
+    "art": "assets/creatures.webp"
    },
    {
     "id": "70afc74e-e973-41c3-b542-62cfb41cafd6",
@@ -503,10 +449,328 @@
     "art": "assets/last-motel-on-earth.webp"
    },
    {
+    "id": "f483ad31-2312-4f84-a18d-077a7efa7c74",
+    "title": "Imperial Funk",
+    "genre": "",
+    "art": "assets/imperial-funk.webp"
+   },
+   {
+    "id": "b9da117c-3115-4562-ba1e-ce1155d09586",
+    "title": "The Signal Came Back",
+    "genre": "",
+    "art": "assets/the-signal-came-back.webp"
+   },
+   {
+    "id": "ce88bd47-416a-4310-ab1d-cb96e879976f",
+    "title": "Dancing Under the Sun",
+    "genre": "",
+    "art": "assets/dancing-under-the-sun.webp"
+   },
+   {
+    "id": "3072febd-c44d-4c40-adbc-83f2f28c7658",
+    "title": "Le Chien Triste",
+    "genre": "",
+    "art": "assets/le-chien-triste.webp"
+   },
+   {
+    "id": "347161b1-290c-435c-8a9c-ce9be0ba893e",
+    "title": "If You See Stairs In The Woods... Do Not Ascend",
+    "genre": "",
+    "art": "assets/if-you-see-stairs-in-the-woods-do-not-ascend.webp"
+   },
+   {
+    "id": "f62a2b9f-57bd-44d3-b8df-809b108edfe0",
+    "title": "Tonight",
+    "genre": "",
+    "art": "assets/tonight.webp"
+   },
+   {
+    "id": "f1dc19c3-5d59-4068-8c85-0614458ea1be",
+    "title": "Mirror Girl",
+    "genre": "",
+    "art": "assets/mirror-girl.webp"
+   },
+   {
+    "id": "09b129ef-2d38-40c6-87ad-4e9bcc2ce8fd",
+    "title": "Yaquina Bay Blue",
+    "genre": "",
+    "art": "assets/yaquina-bay-blue.webp"
+   },
+   {
+    "id": "8570bcdf-5606-4a09-b588-eaa285237cc5",
+    "title": "Pages 1 Through 5",
+    "genre": "",
+    "art": "assets/pages-1-through-5.webp"
+   },
+   {
+    "id": "29b38dd7-fa24-4880-963e-b2eb981b22b1",
+    "title": "Velvet Ferrari",
+    "genre": "Disco Rock",
+    "art": "assets/velvet-ferrari.webp"
+   },
+   {
+    "id": "97c390fc-8aeb-4ea1-ac0b-1de5b5176c9f",
+    "title": "Ride On Stella",
+    "genre": "1990s West Coast G-funk Hip-hop",
+    "art": "assets/ride-on-stella.webp"
+   },
+   {
+    "id": "06205005-1f23-4f39-baae-7cd7c256c170",
+    "title": "Paper Bag Teeth",
+    "genre": "Dark Electro Drum And Bass",
+    "art": "assets/paper-bag-teeth.webp"
+   },
+   {
+    "id": "63b9ccfd-e87d-41f9-9aed-9de43b0450d4",
+    "title": "Shot Gun Night",
+    "genre": "",
+    "art": "assets/shot-gun-night.webp"
+   },
+   {
+    "id": "6ef1442f-3c29-4081-baaa-eae66f5760ed",
+    "title": "Escaping",
+    "genre": "",
+    "art": "assets/escaping.webp"
+   },
+   {
+    "id": "48479b0c-aae9-4bae-b278-69490373f7b5",
+    "title": "Past The Line",
+    "genre": "",
+    "art": "assets/past-the-line.webp"
+   },
+   {
+    "id": "bb73ae97-0f8d-4818-972a-7834d2873c53",
+    "title": "This House Grows",
+    "genre": "Dark Dance-punk Fused",
+    "art": "assets/this-house-grows.webp"
+   },
+   {
+    "id": "c950f9a1-ea0f-4c4b-b43e-944acfe18d25",
+    "title": "The Last Space Boat To Mars (Instrumental)",
+    "genre": "Retro Orchestral Pop",
+    "art": "assets/space-boat-instrumental.webp"
+   },
+   {
+    "id": "76884fe8-2072-46fa-b181-eda91541f22f",
+    "title": "Pista a Waikiki",
+    "genre": "",
+    "art": "assets/pista-a-waikiki.webp"
+   },
+   {
+    "id": "c0c44584-4b90-4ab3-a2f5-77bc2e282308",
+    "title": "Winstons & Indian Food",
+    "genre": "",
+    "art": "assets/winstons-indian-food.webp"
+   },
+   {
+    "id": "e67ad8fa-66c3-46ea-aef4-e30ce552ae8e",
+    "title": "Newport-Ed",
+    "genre": "",
+    "art": "assets/newport-ed.webp"
+   },
+   {
+    "id": "d50e7436-bee8-4625-b4b8-0be3e3c05211",
+    "title": "Under the Sun",
+    "genre": "",
+    "art": "assets/under-the-sun.webp"
+   },
+   {
+    "id": "24ed84d8-8318-446b-b977-00c4a5155144",
+    "title": "The Smoking Respiratory Therapist",
+    "genre": "",
+    "art": "assets/the-smoking-respiratory-therapist.webp"
+   },
+   {
+    "id": "b23ad991-6f07-45dc-9fe3-ac81f9101733",
+    "title": "The Last Space Boat To Mars",
+    "genre": "Retro Orchestral Pop",
+    "art": "assets/space-boat.webp"
+   },
+   {
+    "id": "c34b7602-c050-4de6-9668-bc0dc140de9b",
+    "title": "Jordan’s Birthday",
+    "genre": "",
+    "art": "assets/jordan-s-birthday.webp"
+   },
+   {
+    "id": "c7a8cc47-2473-4f89-a687-080d9e71f0bd",
+    "title": "The World \"Jones\" Made",
+    "genre": "British 1980 Synth-Pop",
+    "art": "assets/jones.webp"
+   },
+   {
+    "id": "0164fa0b-45b5-4136-92a5-eb1919fec7d8",
+    "title": "Electric Little Heart",
+    "genre": "Italian Disco",
+    "art": "assets/electric-little-heart.webp"
+   },
+   {
+    "id": "d29d2079-55e1-4363-a56f-cce907cbb17d",
+    "title": "Gravity's Silence",
+    "genre": "",
+    "art": "assets/gravity-s-silence.webp"
+   },
+   {
+    "id": "962e8b41-33d5-43a7-afee-5311be804175",
+    "title": "Parallel Dimension",
+    "genre": "",
+    "art": "assets/parallel-dimension.webp"
+   },
+   {
+    "id": "e386b415-6631-4db4-a7e0-5a2f223763ad",
+    "title": "Orbitz",
+    "genre": "",
+    "art": "assets/orbitz.webp"
+   },
+   {
+    "id": "84a07b9f-e7df-44c5-95ef-f542da3891fa",
+    "title": "My Mom's Healed Vagina",
+    "genre": "",
+    "art": "assets/my-mom-s-healed-vagina.webp"
+   },
+   {
+    "id": "28beb3f3-ff4b-426b-bf4a-14189012c028",
+    "title": "House on Ash Street Lane",
+    "genre": "",
+    "art": "assets/house-on-ash-street-lane.webp"
+   },
+   {
+    "id": "c8c3701b-cc9a-4c0e-9a28-b2f0315c78b9",
+    "title": "Cooking up Chaos",
+    "genre": "",
+    "art": "assets/cooking-up-chaos.webp"
+   },
+   {
+    "id": "9c366f6b-951b-44e2-8e81-1770b89bf888",
+    "title": "Black Halo Signal",
+    "genre": "Trip-Hop",
+    "art": "assets/black-halo-signal.webp"
+   },
+   {
+    "id": "cb8e0503-844b-424f-9574-847c0cc265f1",
+    "title": "Lucinda’s Groove",
+    "genre": "",
+    "art": "assets/lucinda-s-groove.webp"
+   },
+   {
+    "id": "8a267ad9-76ee-4454-8f18-b82646130c77",
+    "title": "Blue Line",
+    "genre": "Pop Ballad",
+    "art": "assets/blue-line.webp"
+   },
+   {
+    "id": "15a95331-c989-4cd1-a612-ba0801e24ae9",
+    "title": "AM Radio Vampires",
+    "genre": "",
+    "art": "assets/am-radio-vampires.webp"
+   },
+   {
     "id": "12cc0489-ee5e-4c0d-81e7-0f884f1715dd",
     "title": "Dust on My Boots",
     "genre": "",
     "art": "assets/dust-on-my-boots.webp"
+   },
+   {
+    "id": "f865ef92-1283-4572-ab46-549fdcde1670",
+    "title": "Door Without A Door",
+    "genre": "",
+    "art": "assets/door-without-a-door.webp"
+   },
+   {
+    "id": "0ae0553f-181c-4e66-a78e-62f894511678",
+    "title": "Black Cat",
+    "genre": "",
+    "art": "assets/black-cat.webp"
+   },
+   {
+    "id": "00292715-1c8c-4ff5-a71a-c3240c2ea70c",
+    "title": "Solar Groove",
+    "genre": "",
+    "art": "assets/solar-groove.webp"
+   },
+   {
+    "id": "24b7c8e8-5adc-4f72-afaf-06bc987aacb7",
+    "title": "Astoria Storm",
+    "genre": "",
+    "art": "assets/astoria-storm.webp"
+   },
+   {
+    "id": "532b5b71-f35c-4d77-b5bb-0660e537becd",
+    "title": "Neon Flies",
+    "genre": "",
+    "art": "assets/neon-flies.webp"
+   },
+   {
+    "id": "73f6c0c3-efcc-4c29-8755-2259eb122486",
+    "title": "Blue Plate @ 27",
+    "genre": "",
+    "art": "assets/blue-plate-27.webp"
+   },
+   {
+    "id": "ee45b7c3-1f52-417a-9e08-f9f49fa1a103",
+    "title": "Fourteen Foot Man",
+    "genre": "",
+    "art": "assets/fourteen-foot-man.webp"
+   },
+   {
+    "id": "50573af7-5138-4891-a496-2d6199b63111",
+    "title": "Bears, Beets & Battlestar Galactica",
+    "genre": "",
+    "art": "assets/bears-beets-battlestar-galactica.webp"
+   },
+   {
+    "id": "bdef8bee-a5af-4353-96d8-6fdaa9bcc4b2",
+    "title": "Don't Look Back Tonight",
+    "genre": "Trip Hop",
+    "art": "assets/don-t-look-back-tonight.webp"
+   },
+   {
+    "id": "fd8d3909-515d-41ba-8e6b-ca3172705c5f",
+    "title": "Insecure Paws",
+    "genre": "",
+    "art": "assets/insecure-paws.webp"
+   },
+   {
+    "id": "66a754bc-4dc4-465b-8749-0bcf24e25937",
+    "title": "Bodega Cat",
+    "genre": "",
+    "art": "assets/bodega-cat.webp"
+   },
+   {
+    "id": "8c680f0b-c28d-48c0-9812-906503463ace",
+    "title": "Cats Break Plates",
+    "genre": "",
+    "art": "assets/cats-break-plates.webp"
+   },
+   {
+    "id": "2006827b-85df-47e5-855a-8a10b3a6885c",
+    "title": "Foghorn Stethoscope",
+    "genre": "",
+    "art": "assets/foghorn-stethoscope.webp"
+   },
+   {
+    "id": "e385337c-d9b9-4b93-a12f-3ae134674cfd",
+    "title": "Cardboard Memories",
+    "genre": "",
+    "art": "assets/cardboard-memories.webp"
+   },
+   {
+    "id": "273a0109-1579-4bbb-9880-57ff806d9623",
+    "title": "Ginger Garden",
+    "genre": "",
+    "art": "assets/ginger-garden.webp"
+   },
+   {
+    "id": "c9dc9172-0b48-4fd8-9411-380cf84d5958",
+    "title": "Chrome Orbit",
+    "genre": "",
+    "art": "assets/chrome-orbit.webp"
+   },
+   {
+    "id": "2aa5f0bb-e44d-484d-a329-4ee400eb245f",
+    "title": "Agate Beach Fugue",
+    "genre": "",
+    "art": "assets/agate-beach-fugue.webp"
    }
   ]
  }

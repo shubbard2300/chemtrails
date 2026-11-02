@@ -18,7 +18,7 @@ Every record is a fragment of a larger story.
 
 ## The site
 
-Static site on Vercel at [chemtrails-music.com](https://www.chemtrails-music.com/). Redesigned 2026-11-01: a title-sequence look (Techniscope letterbox bars, 1960s-70s Italian space-age colour, spaghetti-western dusk, layered parallax). **Audio plays from SoundCloud**: six records, each a SoundCloud set, driven by a custom player over SoundCloud's Widget API. Suno songs show as a Singles shelf linking to their Suno pages (Suno's audio CDN went private, so they cannot play in-page).
+Static site on Vercel at [chemtrails-music.com](https://www.chemtrails-music.com/). Redesigned 2026-11-01: a title-sequence look (Techniscope letterbox bars, 1960s-70s Italian space-age colour, spaghetti-western dusk, layered parallax). **Audio plays from SoundCloud**: six records, each a SoundCloud set, driven by a custom player over SoundCloud's Widget API. The 65 Suno songs are a Singles shelf played from the SoundCloud set `loose-transmissions` (Suno's audio CDN went private); `singles.tracks` must stay in the set's order, because card k plays set track k.
 
 - `content/records.json` is the content: six records (title, colour, SoundCloud set URL, track list, liner notes) and the singles. Edit it, then `node build.mjs`
 - `build.mjs` generates `index.html`, `records/<slug>/index.html`, `sitemap.xml` and `llms.txt`. Never hand-edit those
@@ -35,4 +35,4 @@ Add an entry to `records` in `content/records.json` (slug, title, `sc` set URL, 
 python3 sync.py --push
 ```
 
-Adds public Suno songs missing from `singles` in `records.json`, refreshes changed cover art, runs the build, commits, and pushes. Runs every 6 hours via launchd (`com.hailie.chemtrails-sync.plist`, logs to `~/Library/Logs/chemtrails-sync.log`). **Paused 2026-11-01 by a `.paused` file** in this folder (the job exits at once while it exists; delete it to resume). Once the Suno tracks live in a SoundCloud set, put that URL in `singles.sc` and the cards become playable; the sync is then redundant.
+Adds public Suno songs missing from `singles` in `records.json`, refreshes changed cover art, runs the build, commits, and pushes. Runs every 6 hours via launchd (`com.hailie.chemtrails-sync.plist`, logs to `~/Library/Logs/chemtrails-sync.log`). **Paused 2026-11-01 by a `.paused` file** in this folder (the job exits at once while it exists; delete it to resume). The singles now play from a SoundCloud set (`singles.sc`), so keep the sync paused: it would append songs that are not in the set and break the card-to-track mapping, and its `-resize 640 640` squashes non-square Suno art.

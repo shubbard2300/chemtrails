@@ -224,6 +224,19 @@
   if (document.readyState === "complete") preload();
   else addEventListener("load", preload);
 
+  // ---------- singles shelf: first two rows, the rest on demand (every card stays in the HTML) ----------
+  const more = $("[data-more]");
+  if (more) {
+    const cards = $$(".single", $(".single-grid"));
+    cards.slice(14).forEach((c) => c.classList.add("is-extra"));
+    more.hidden = false;
+    more.addEventListener("click", () => {
+      cards.forEach((c) => c.classList.remove("is-extra"));
+      more.hidden = true;
+      cards[14].focus();
+    });
+  }
+
   // ---------- analytics ----------
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a");

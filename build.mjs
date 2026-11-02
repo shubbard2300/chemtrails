@@ -72,7 +72,7 @@ function recPanel(r, i, page = false) {
 
 const singleCards = singles.tracks
   .map((t, k) => {
-    const img = `<img src="/${t.art}" alt="" width="320" height="320" loading="lazy" decoding="async">`;
+    const img = `<img src="/${t.art}?v=${hash(t.art)}" alt="" width="320" height="320" loading="lazy" decoding="async">`;
     const label = `<span class="s-title">${esc(t.title)}</span>${t.genre ? `<span class="s-genre">${esc(t.genre)}</span>` : ""}`;
     return singles.sc
       ? `<button type="button" class="single" data-i="${k}">${img}${label}</button>`
@@ -221,13 +221,14 @@ ${SCENE}
 ${records.map((r, i) => recPanel(r, i)).join("\n")}
     </section>
 
-    <section class="section singles" id="singles"${singles.sc ? ` data-rec="singles" data-sc="${esc(singles.sc)}" data-title="Singles" data-art="/assets/orbitz.webp"` : ""}>
+    <section class="section singles" id="singles"${singles.sc ? ` data-rec="singles" data-sc="${esc(singles.sc)}" data-title="Singles" data-art="/assets/orbitz.webp?v=${hash("assets/orbitz.webp")}"` : ""}>
       <div class="sec-head">
         <p class="kicker">Singles</p>
         <h2>Loose transmissions</h2>
         <p class="sec-sub">${singles.tracks.length} songs made with Suno. ${singles.sc ? "Streaming from SoundCloud." : "They play on Suno for now and are moving to SoundCloud."}</p>
       </div>
       <div class="single-grid">${singleCards}</div>
+      <button type="button" class="btn btn-line singles-more" data-more hidden>Show all ${singles.tracks.length} songs</button>
     </section>
 
     <section class="section" id="merch">
