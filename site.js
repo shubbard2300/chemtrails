@@ -215,9 +215,8 @@
     }
   });
 
-  // preload a record's widget when its panel is near the viewport (and the first one right away)
+  // load a record's widget as its panel nears the viewport (a hero or track click loads it on demand)
   const preload = () => {
-    if (order.length) ensure(order[0]);
     const io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) ensure(e.target.dataset.rec); }), { rootMargin: "300px" });
     Object.values(recs).forEach((r) => io2.observe(r.el));
   };
@@ -251,7 +250,7 @@
     if (e.target.closest("#paypal-container-W5HUHU7FYFXY8")) track("donate_click", { method: "paypal_hosted_button", placement: "support-section" });
   }, true);
 
-  // ---------- PayPal tip jar, loaded after first paint ----------
+  // ---------- PayPal tip jar, loaded as its section nears the viewport ----------
   if ($("#paypal-container-W5HUHU7FYFXY8")) {
     let loaded = false;
     const loadPayPal = () => {
@@ -262,8 +261,6 @@
       s.onload = () => paypal.HostedButtons({ hostedButtonId: "W5HUHU7FYFXY8" }).render("#paypal-container-W5HUHU7FYFXY8");
       document.body.appendChild(s);
     };
-    if (document.readyState === "complete") loadPayPal();
-    else addEventListener("load", loadPayPal);
-    setTimeout(loadPayPal, 4000);
+    new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); loadPayPal(); } }, { rootMargin: "800px" }).observe($("#paypal-container-W5HUHU7FYFXY8"));
   }
 })();

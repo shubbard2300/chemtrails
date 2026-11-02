@@ -51,7 +51,7 @@ function recPanel(r, i, page = false) {
   <div class="rec-ghost" aria-hidden="true">${esc(r.title)}</div>
   <div class="rec-inner">
     <div class="rec-poster">
-      <img src="/assets/records/${r.slug}-thumb.webp" srcset="/assets/records/${r.slug}-thumb.webp 480w, /assets/records/${r.slug}.webp 1200w" sizes="(max-width: 900px) 80vw, 440px" width="480" height="480" alt="${esc(r.title)} cover art"${i > 0 || page ? ' loading="lazy"' : ""} decoding="async">
+      <img src="/assets/records/${r.slug}-thumb.webp" srcset="/assets/records/${r.slug}-thumb.webp 480w, /assets/records/${r.slug}.webp 1200w" sizes="(max-width: 900px) 80vw, 440px" width="480" height="480" alt="${esc(r.title)} cover art"${page ? ' fetchpriority="high"' : i > 0 ? ' loading="lazy"' : ""} decoding="async">
       <span class="rec-no">No.&nbsp;${ROMAN[i]}</span>
     </div>
     <div class="rec-body">
