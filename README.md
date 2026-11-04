@@ -27,7 +27,7 @@ Static site on Vercel at [chemtrails-music.com](https://www.chemtrails-music.com
 
 ## Adding a record
 
-Add an entry to `records` in `content/records.json` (slug, title, `sc` set URL, `tracks` as `[title, "/chemtrails/<track-slug>"]` in set order, a `wash` colour), put its cover through `cwebp` as `assets/records/<slug>.webp` (1200px), `<slug>-thumb.webp` (480px) and `<slug>-wash.webp` (48px), run `node build.mjs`, push.
+Add an entry to `records` in `content/records.json` (slug, title, `sc` set URL, `tracks` as `[title, "/chemtrails/<track-slug>"]` in set order, a `wash` colour), put its cover through `cwebp` as `assets/records/<slug>.webp` (1200px), `<slug>-thumb.webp` (480px) and `<slug>-wash.webp` (48px), run `node build.mjs`, push. Rules the site depends on: a song lives in exactly one record (the 7 repeats were removed 2026-11-03), and the site's order is the SoundCloud set's order, so **editing a SoundCloud playlist shifts the live site's rows until the matching `records.json` is pushed**; do the playlist edit and the push together. Every single in `singles.tracks` needs `sc` (its `/chemtrails/<slug>` path) for its share button. The singles section comes first on the home page; every track has a share button (the phone's share sheet where there is one, otherwise it copies the SoundCloud link).
 
 ## Syncing Suno singles
 

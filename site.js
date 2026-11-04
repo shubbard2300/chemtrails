@@ -185,7 +185,7 @@
   }
 
   document.addEventListener("click", (e) => {
-    const row = e.target.closest(".tracks button, .single[data-i]");
+    const row = e.target.closest(".tracks button[data-i], .single[data-i]");
     if (row) {
       const rec = row.closest("[data-rec]");
       const i = +(row.dataset.i ?? [...row.closest("ol").children].indexOf(row.parentElement));
@@ -226,15 +226,40 @@
   // ---------- singles shelf: first two rows, the rest on demand (every card stays in the HTML) ----------
   const more = $("[data-more]");
   if (more) {
-    const cards = $$(".single", $(".single-grid"));
-    cards.slice(14).forEach((c) => c.classList.add("is-extra"));
+    const items = $$(".single-grid > *");
+    items.slice(14).forEach((c) => c.classList.add("is-extra"));
     more.hidden = false;
     more.addEventListener("click", () => {
-      cards.forEach((c) => c.classList.remove("is-extra"));
+      items.forEach((c) => c.classList.remove("is-extra"));
       more.hidden = true;
-      cards[14].focus();
+      (items[14].querySelector(".single") || items[14]).focus();
     });
   }
+
+  // ---------- share: the native sheet where there is one, else copy the link ----------
+  const live = $("#share-live");
+  const flash = (btn) => {
+    btn.classList.add("is-copied");
+    if (live) live.textContent = "Link copied";
+    setTimeout(() => { btn.classList.remove("is-copied"); if (live) live.textContent = ""; }, 1800);
+  };
+  async function share(btn, url, title) {
+    let method = "share";
+    try {
+      await navigator.share({ title: `${title} — Chemtrails`, text: `${title} by Chemtrails`, url }); // throws when there is no share sheet
+    } catch (e) {
+      if (e && e.name === "AbortError") return; // closed the sheet
+      method = "copy";
+      try { await navigator.clipboard.writeText(url); flash(btn); } catch (_) { prompt("Copy this link", url); }
+    }
+    track("share_click", { method, track: title, link_url: url });
+  }
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-share], #p-share");
+    if (!b) return;
+    const inBar = b.id === "p-share";
+    share(b, inBar ? bar.sc.href : b.dataset.share, inBar ? bar.title.textContent : b.dataset.title);
+  });
 
   // ---------- analytics ----------
   document.addEventListener("click", (e) => {

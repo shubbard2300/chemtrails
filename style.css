@@ -257,7 +257,8 @@ h2 {
 .rec-actions { display: flex; gap: 14px 18px; align-items: center; flex-wrap: wrap; margin: 26px 0 30px; }
 
 .tracks { list-style: none; border-top: 1px solid var(--line); }
-.tracks li { break-inside: avoid; }
+.tracks li { break-inside: avoid; display: flex; }
+.tracks li > button[data-i] { flex: 1; min-width: 0; }
 .tracks button {
   display: grid; grid-template-columns: 2.6em 1fr auto; gap: 12px; align-items: baseline;
   width: 100%; padding: 11px 6px; background: none; border: 0; border-bottom: 1px solid var(--line);
@@ -300,8 +301,28 @@ h2 {
 .s-go { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ochre); margin-top: 4px; opacity: 0; transition: opacity 0.2s; }
 .single:hover .s-go, .single:focus-visible .s-go { opacity: 1; }
 @media (hover: none) { .s-go { opacity: 1; } }
-.single.is-extra, .singles-more[hidden] { display: none; }
+.single-grid > .is-extra, .singles-more[hidden] { display: none; }
 .singles-more { margin-top: 32px; }
+.s-item { position: relative; }
+.s-item .single { width: 100%; }
+
+/* share buttons: track rows, singles cards, player bar */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.share {
+  position: relative; display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0;
+  background: none; border: 0; color: var(--bone-dim); cursor: pointer; transition: color 0.2s, background 0.2s, opacity 0.2s;
+}
+.share svg { width: 17px; height: 17px; }
+.share:hover, .share:focus-visible, .share.is-copied { color: var(--ochre); }
+.share.is-copied::after {
+  content: "Copied"; position: absolute; right: calc(100% + 4px); top: 50%; transform: translateY(-50%);
+  padding: 3px 8px; background: var(--bone); color: var(--ink); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; white-space: nowrap; border-radius: 2px; pointer-events: none;
+}
+.tracks li > .share { grid-template-columns: 1fr; place-items: center; width: 44px; height: auto; padding: 0; border-bottom: 1px solid var(--line); }
+.share--card { position: absolute; top: 8px; right: 8px; width: 34px; height: 34px; border-radius: 50%; background: rgba(13, 9, 7, 0.66); color: var(--bone); opacity: 0.88; }
+.s-item:hover .share--card, .share--card:focus-visible, .share--card.is-copied { opacity: 1; }
+.player-controls .share { width: 38px; height: 38px; padding: 0; }
 
 /* merch band */
 #merch { padding-top: 0; background: var(--ink-2); }

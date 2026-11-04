@@ -8,7 +8,7 @@
    "genre": "Dream-Pop",
    "wash": "#7a4a14",
    "sc": "https://soundcloud.com/chemtrails/sets/companion-weather",
-   "total": "1:27:44",
+   "total": "1:24:10",
    "desc": "A record that sneaks up on you. On paper, an album built around songs about current and past pets sounds like it might drift toward sentiment, whimsy, or novelty. But this one doesn’t. Instead, it lands in a far rarer place — tender, strange, bruised, funny in spots, and quietly devastating in the way only the most personal records can be.\n\nWhat makes Companion Weather work is that it understands a truth most people don’t say out loud: animals are never just animals. They become roommates, witnesses, minor gods of the domestic world. They watch us unravel, recover, fall in love, lose people, change houses, change years, and become versions of ourselves we never meant to be. They sit in the background of our lives until one day we realize they were never in the background at all. This album knows that. Every song feels less like a sketch of a pet and more like a weather report from a life once shared.\n\nThere’s something deeply 1970s about the emotional temperature here. The record feels lived-in rather than manufactured — warm tape hiss, fading light, old furniture, worn sleeves, and that particular late-night honesty that only shows up when nobody is trying to impress anyone. It doesn’t overreach. It doesn’t beg for tears. It just tells the truth softly enough that the sadness has room to breathe. That restraint gives the whole thing weight.\n\nAnd that’s really the secret of Companion Weather: it isn’t just about cats and dogs and beloved companions, though they are its heart. It’s about memory. Routine. Grief. The shape of a house after someone — or something — is gone. The strange dignity of everyday love. The bowl in the corner. The sound in the hallway that isn’t there anymore. The way devotion can make even the smallest life feel mythic.\n\nAt its best, the album feels like a stack of old snapshots left near a turntable during a storm. It’s intimate without becoming precious, melancholic without collapsing under its own sadness, and affectionate without ever turning cute. That’s a difficult balance to strike, but Companion Weather finds it. The result is a record that feels less like a concept album and more like a real emotional climate — a little sun, a little rain, a little ghost in the room.\n\nCompanion Weather isn’t an album about pets in the simple sense. It’s about the emotional weather they leave behind — and the lives we measure, however quietly, by who once waited for us at the door.",
    "tracks": [
     [
@@ -94,10 +94,6 @@
     [
      "Teaser",
      "/chemtrails/teaser"
-    ],
-    [
-     "Velvet Reverberations",
-     "/chemtrails/velvet-reverberations"
     ]
    ]
   },
@@ -109,13 +105,9 @@
    "genre": "Dream-Pop",
    "wash": "#1b2250",
    "sc": "https://soundcloud.com/chemtrails/sets/spanish-for-night-owls",
-   "total": "1:40:21",
+   "total": "1:06:37",
    "desc": "Spanish For Night Owls is less a lesson than a seduction.\nIt lives in that strange, beautiful hour when the city softens, the lights blur, and everything starts to feel a little more cinematic.\n\nBuilt on warm Spanish guitar, smoked-out beats, late-night jazz textures, and vocals that drift between intimacy and mystery, the record feels like a whispered conversation on a rooftop at 1:37 a.m. There’s romance here, but it’s not sweet. It’s moodier than that. More knowing. More electric. Like neon on wet pavement, radio static in the distance, and a language you feel before you fully understand it.\n\nThis is music for insomniacs, lovers, smokers, wanderers, and anyone who’s ever learned more from the night than they did during the day.\n\n\"Spanish For Night Owls\" -  doesn’t ask for perfect fluency.\n\nIt asks you to Stay Awake.",
    "tracks": [
-    [
-     "Ghost Network",
-     "/chemtrails/ghost-network"
-    ],
     [
      "Signal Through the Static",
      "/chemtrails/signal-through-the-static"
@@ -149,20 +141,8 @@
      "/chemtrails/a-love-story"
     ],
     [
-     "Rain On The Plain Falls Mostly ...",
-     "/chemtrails/rain-on-the-plain-falls-mostly"
-    ],
-    [
      "Nella Nebbia",
      "/chemtrails/nella-nebbia"
-    ],
-    [
-     "That Other Guy",
-     "/chemtrails/that-other-guy"
-    ],
-    [
-     "No Martians",
-     "/chemtrails/no-martians"
     ],
     [
      "Introduction",
@@ -173,16 +153,8 @@
      "/chemtrails/my-cat-melted-the-sun"
     ],
     [
-     "Teaser",
-     "/chemtrails/teaser"
-    ],
-    [
      "Velvet Reverberations",
      "/chemtrails/velvet-reverberations"
-    ],
-    [
-     "Bombing At Starbucks",
-     "/chemtrails/bombing-at-starbucks"
     ],
     [
      "Fishing Trip",
@@ -386,391 +358,456 @@
     "id": "f0d0d688-fc71-4fe3-bb8a-042dee853f74",
     "title": "Joaquin's March",
     "genre": "",
-    "art": "assets/joaquin-s-march.webp"
+    "art": "assets/joaquin-s-march.webp",
+    "sc": "/chemtrails/joaquins-march-31"
    },
    {
     "id": "a2a52a57-0d12-42b1-bd2a-be05187e5e88",
     "title": "Match Book Saint",
     "genre": "",
-    "art": "assets/match-book-saint.webp"
+    "art": "assets/match-book-saint.webp",
+    "sc": "/chemtrails/match-book-saint-37"
    },
    {
     "id": "d4c5e889-70cd-42c5-a002-9605b8ffa9d1",
     "title": "Starry Eyes",
     "genre": "",
-    "art": "assets/starry-eyes.webp"
+    "art": "assets/starry-eyes.webp",
+    "sc": "/chemtrails/starry-eyes-53"
    },
    {
     "id": "ff90fe16-c008-415a-b1b3-81588649a836",
     "title": "Grief in Sequins",
     "genre": "",
-    "art": "assets/grief-in-sequins.webp"
+    "art": "assets/grief-in-sequins.webp",
+    "sc": "/chemtrails/grief-in-sequins-26"
    },
    {
     "id": "58b96d52-784f-46fc-8953-d5852c6ab7f4",
     "title": "Coastal Cathedral",
     "genre": "Disco",
-    "art": "assets/coastal-cathedral.webp"
+    "art": "assets/coastal-cathedral.webp",
+    "sc": "/chemtrails/coastal-cathedral-14"
    },
    {
     "id": "01450842-42c2-469d-b662-41d974601d05",
     "title": "King Tides",
     "genre": "Disco-Pop",
-    "art": "assets/king-tides.webp"
+    "art": "assets/king-tides.webp",
+    "sc": "/chemtrails/king-tides-33"
    },
    {
     "id": "0609e47a-77cc-43a4-a636-aac0be1ce660",
     "title": "Neon Shadows",
     "genre": "ZZ Top Inspired Blues-rock",
-    "art": "assets/neon-shadows.webp"
+    "art": "assets/neon-shadows.webp",
+    "sc": "/chemtrails/neon-shadows-41"
    },
    {
     "id": "d0a2db3f-b6e6-45a3-bbd7-e342446c5cd2",
     "title": "Silk, Smoke & Wishes",
     "genre": "",
-    "art": "assets/silk-smoke-wishes.webp"
+    "art": "assets/silk-smoke-wishes.webp",
+    "sc": "/chemtrails/silk-smoke-wishes-51"
    },
    {
     "id": "373efa85-0969-4cfd-80f6-7a1e2c9d3484",
     "title": "Blue Eyes of Gold",
     "genre": "",
-    "art": "assets/blue-eyes-of-gold.webp"
+    "art": "assets/blue-eyes-of-gold.webp",
+    "sc": "/chemtrails/blue-eyes-of-gold-7"
    },
    {
     "id": "4cba3ba6-f7e5-4bb4-a421-d50d293eeb73",
     "title": "The Creatures We Are All",
     "genre": "",
-    "art": "assets/creatures.webp"
+    "art": "assets/creatures.webp",
+    "sc": "/chemtrails/the-creatures-we-are-all-54"
    },
    {
     "id": "70afc74e-e973-41c3-b542-62cfb41cafd6",
     "title": "Last Motel on Earth",
     "genre": "",
-    "art": "assets/last-motel-on-earth.webp"
+    "art": "assets/last-motel-on-earth.webp",
+    "sc": "/chemtrails/last-motel-on-earth-34"
    },
    {
     "id": "f483ad31-2312-4f84-a18d-077a7efa7c74",
     "title": "Imperial Funk",
     "genre": "",
-    "art": "assets/imperial-funk.webp"
+    "art": "assets/imperial-funk.webp",
+    "sc": "/chemtrails/imperial-funk-29"
    },
    {
     "id": "b9da117c-3115-4562-ba1e-ce1155d09586",
     "title": "The Signal Came Back",
     "genre": "",
-    "art": "assets/the-signal-came-back.webp"
+    "art": "assets/the-signal-came-back.webp",
+    "sc": "/chemtrails/the-signal-came-back-57"
    },
    {
     "id": "ce88bd47-416a-4310-ab1d-cb96e879976f",
     "title": "Dancing Under the Sun",
     "genre": "",
-    "art": "assets/dancing-under-the-sun.webp"
+    "art": "assets/dancing-under-the-sun.webp",
+    "sc": "/chemtrails/dancing-under-the-sun-16"
    },
    {
     "id": "3072febd-c44d-4c40-adbc-83f2f28c7658",
     "title": "Le Chien Triste",
     "genre": "",
-    "art": "assets/le-chien-triste.webp"
+    "art": "assets/le-chien-triste.webp",
+    "sc": "/chemtrails/le-chien-triste-35"
    },
    {
     "id": "347161b1-290c-435c-8a9c-ce9be0ba893e",
     "title": "If You See Stairs In The Woods... Do Not Ascend",
     "genre": "",
-    "art": "assets/if-you-see-stairs-in-the-woods-do-not-ascend.webp"
+    "art": "assets/if-you-see-stairs-in-the-woods-do-not-ascend.webp",
+    "sc": "/chemtrails/if-you-see-stairs-in-the-woods-do-not-ascend-28"
    },
    {
     "id": "f62a2b9f-57bd-44d3-b8df-809b108edfe0",
     "title": "Tonight",
     "genre": "",
-    "art": "assets/tonight.webp"
+    "art": "assets/tonight.webp",
+    "sc": "/chemtrails/tonight-61"
    },
    {
     "id": "f1dc19c3-5d59-4068-8c85-0614458ea1be",
     "title": "Mirror Girl",
     "genre": "",
-    "art": "assets/mirror-girl.webp"
+    "art": "assets/mirror-girl.webp",
+    "sc": "/chemtrails/mirror-girl-38"
    },
    {
     "id": "09b129ef-2d38-40c6-87ad-4e9bcc2ce8fd",
     "title": "Yaquina Bay Blue",
     "genre": "",
-    "art": "assets/yaquina-bay-blue.webp"
+    "art": "assets/yaquina-bay-blue.webp",
+    "sc": "/chemtrails/yaquina-bay-blue-65"
    },
    {
     "id": "8570bcdf-5606-4a09-b588-eaa285237cc5",
     "title": "Pages 1 Through 5",
     "genre": "",
-    "art": "assets/pages-1-through-5.webp"
+    "art": "assets/pages-1-through-5.webp",
+    "sc": "/chemtrails/pages-1-through-5-44"
    },
    {
     "id": "29b38dd7-fa24-4880-963e-b2eb981b22b1",
     "title": "Velvet Ferrari",
     "genre": "Disco Rock",
-    "art": "assets/velvet-ferrari.webp"
+    "art": "assets/velvet-ferrari.webp",
+    "sc": "/chemtrails/velvet-ferrari-63"
    },
    {
     "id": "97c390fc-8aeb-4ea1-ac0b-1de5b5176c9f",
     "title": "Ride On Stella",
     "genre": "1990s West Coast G-funk Hip-hop",
-    "art": "assets/ride-on-stella.webp"
+    "art": "assets/ride-on-stella.webp",
+    "sc": "/chemtrails/ride-on-stella-49"
    },
    {
     "id": "06205005-1f23-4f39-baae-7cd7c256c170",
     "title": "Paper Bag Teeth",
     "genre": "Dark Electro Drum And Bass",
-    "art": "assets/paper-bag-teeth.webp"
+    "art": "assets/paper-bag-teeth.webp",
+    "sc": "/chemtrails/paper-bag-teeth-45"
    },
    {
     "id": "63b9ccfd-e87d-41f9-9aed-9de43b0450d4",
     "title": "Shot Gun Night",
     "genre": "",
-    "art": "assets/shot-gun-night.webp"
+    "art": "assets/shot-gun-night.webp",
+    "sc": "/chemtrails/shot-gun-night-50"
    },
    {
     "id": "6ef1442f-3c29-4081-baaa-eae66f5760ed",
     "title": "Escaping",
     "genre": "",
-    "art": "assets/escaping.webp"
+    "art": "assets/escaping.webp",
+    "sc": "/chemtrails/escaping-21"
    },
    {
     "id": "48479b0c-aae9-4bae-b278-69490373f7b5",
     "title": "Past The Line",
     "genre": "",
-    "art": "assets/past-the-line.webp"
+    "art": "assets/past-the-line.webp",
+    "sc": "/chemtrails/past-the-line-47"
    },
    {
     "id": "bb73ae97-0f8d-4818-972a-7834d2873c53",
     "title": "This House Grows",
     "genre": "Dark Dance-punk Fused",
-    "art": "assets/this-house-grows.webp"
+    "art": "assets/this-house-grows.webp",
+    "sc": "/chemtrails/this-house-grows-60"
    },
    {
     "id": "c950f9a1-ea0f-4c4b-b43e-944acfe18d25",
     "title": "The Last Space Boat To Mars (Instrumental)",
     "genre": "Retro Orchestral Pop",
-    "art": "assets/space-boat-instrumental.webp"
+    "art": "assets/space-boat-instrumental.webp",
+    "sc": "/chemtrails/the-last-space-boat-to-mars-instrumental-55"
    },
    {
     "id": "76884fe8-2072-46fa-b181-eda91541f22f",
     "title": "Pista a Waikiki",
     "genre": "",
-    "art": "assets/pista-a-waikiki.webp"
+    "art": "assets/pista-a-waikiki.webp",
+    "sc": "/chemtrails/pista-a-waikiki-48"
    },
    {
     "id": "c0c44584-4b90-4ab3-a2f5-77bc2e282308",
     "title": "Winstons & Indian Food",
     "genre": "",
-    "art": "assets/winstons-indian-food.webp"
+    "art": "assets/winstons-indian-food.webp",
+    "sc": "/chemtrails/winstons-indian-food-64"
    },
    {
     "id": "e67ad8fa-66c3-46ea-aef4-e30ce552ae8e",
     "title": "Newport-Ed",
     "genre": "",
-    "art": "assets/newport-ed.webp"
+    "art": "assets/newport-ed.webp",
+    "sc": "/chemtrails/newport-ed-42"
    },
    {
     "id": "d50e7436-bee8-4625-b4b8-0be3e3c05211",
     "title": "Under the Sun",
     "genre": "",
-    "art": "assets/under-the-sun.webp"
+    "art": "assets/under-the-sun.webp",
+    "sc": "/chemtrails/under-the-sun-62"
    },
    {
     "id": "24ed84d8-8318-446b-b977-00c4a5155144",
     "title": "The Smoking Respiratory Therapist",
     "genre": "",
-    "art": "assets/the-smoking-respiratory-therapist.webp"
+    "art": "assets/the-smoking-respiratory-therapist.webp",
+    "sc": "/chemtrails/the-smoking-respiratory-therapist-58"
    },
    {
     "id": "b23ad991-6f07-45dc-9fe3-ac81f9101733",
     "title": "The Last Space Boat To Mars",
     "genre": "Retro Orchestral Pop",
-    "art": "assets/space-boat.webp"
+    "art": "assets/space-boat.webp",
+    "sc": "/chemtrails/the-last-space-boat-to-mars-56"
    },
    {
     "id": "c34b7602-c050-4de6-9668-bc0dc140de9b",
     "title": "Jordan’s Birthday",
     "genre": "",
-    "art": "assets/jordan-s-birthday.webp"
+    "art": "assets/jordan-s-birthday.webp",
+    "sc": "/chemtrails/jordans-birthday-32"
    },
    {
     "id": "c7a8cc47-2473-4f89-a687-080d9e71f0bd",
     "title": "The World \"Jones\" Made",
     "genre": "British 1980 Synth-Pop",
-    "art": "assets/jones.webp"
+    "art": "assets/jones.webp",
+    "sc": "/chemtrails/the-world-jones-made-59"
    },
    {
     "id": "0164fa0b-45b5-4136-92a5-eb1919fec7d8",
     "title": "Electric Little Heart",
     "genre": "Italian Disco",
-    "art": "assets/electric-little-heart.webp"
+    "art": "assets/electric-little-heart.webp",
+    "sc": "/chemtrails/electric-little-heart-20"
    },
    {
     "id": "d29d2079-55e1-4363-a56f-cce907cbb17d",
     "title": "Gravity's Silence",
     "genre": "",
-    "art": "assets/gravity-s-silence.webp"
+    "art": "assets/gravity-s-silence.webp",
+    "sc": "/chemtrails/gravitys-silence-25"
    },
    {
     "id": "962e8b41-33d5-43a7-afee-5311be804175",
     "title": "Parallel Dimension",
     "genre": "",
-    "art": "assets/parallel-dimension.webp"
+    "art": "assets/parallel-dimension.webp",
+    "sc": "/chemtrails/parallel-dimension-46"
    },
    {
     "id": "e386b415-6631-4db4-a7e0-5a2f223763ad",
     "title": "Orbitz",
     "genre": "",
-    "art": "assets/orbitz.webp"
+    "art": "assets/orbitz.webp",
+    "sc": "/chemtrails/orbitz-43"
    },
    {
     "id": "84a07b9f-e7df-44c5-95ef-f542da3891fa",
     "title": "My Mom's Healed Vagina",
     "genre": "",
-    "art": "assets/my-mom-s-healed-vagina.webp"
+    "art": "assets/my-mom-s-healed-vagina.webp",
+    "sc": "/chemtrails/my-moms-healed-vagina-39"
    },
    {
     "id": "28beb3f3-ff4b-426b-bf4a-14189012c028",
     "title": "House on Ash Street Lane",
     "genre": "",
-    "art": "assets/house-on-ash-street-lane.webp"
+    "art": "assets/house-on-ash-street-lane.webp",
+    "sc": "/chemtrails/house-on-ash-street-lane-27"
    },
    {
     "id": "c8c3701b-cc9a-4c0e-9a28-b2f0315c78b9",
     "title": "Cooking up Chaos",
     "genre": "",
-    "art": "assets/cooking-up-chaos.webp"
+    "art": "assets/cooking-up-chaos.webp",
+    "sc": "/chemtrails/cooking-up-chaos-15"
    },
    {
     "id": "9c366f6b-951b-44e2-8e81-1770b89bf888",
     "title": "Black Halo Signal",
     "genre": "Trip-Hop",
-    "art": "assets/black-halo-signal.webp"
+    "art": "assets/black-halo-signal.webp",
+    "sc": "/chemtrails/black-halo-signal-6"
    },
    {
     "id": "cb8e0503-844b-424f-9574-847c0cc265f1",
     "title": "Lucinda’s Groove",
     "genre": "",
-    "art": "assets/lucinda-s-groove.webp"
+    "art": "assets/lucinda-s-groove.webp",
+    "sc": "/chemtrails/lucindas-groove-36"
    },
    {
     "id": "8a267ad9-76ee-4454-8f18-b82646130c77",
     "title": "Blue Line",
     "genre": "Pop Ballad",
-    "art": "assets/blue-line.webp"
+    "art": "assets/blue-line.webp",
+    "sc": "/chemtrails/blue-line-8"
    },
    {
     "id": "15a95331-c989-4cd1-a612-ba0801e24ae9",
     "title": "AM Radio Vampires",
     "genre": "",
-    "art": "assets/am-radio-vampires.webp"
+    "art": "assets/am-radio-vampires.webp",
+    "sc": "/chemtrails/am-radio-vampires-1"
    },
    {
     "id": "12cc0489-ee5e-4c0d-81e7-0f884f1715dd",
     "title": "Dust on My Boots",
     "genre": "",
-    "art": "assets/dust-on-my-boots.webp"
+    "art": "assets/dust-on-my-boots.webp",
+    "sc": "/chemtrails/dust-on-my-boots-19"
    },
    {
     "id": "f865ef92-1283-4572-ab46-549fdcde1670",
     "title": "Door Without A Door",
     "genre": "",
-    "art": "assets/door-without-a-door.webp"
+    "art": "assets/door-without-a-door.webp",
+    "sc": "/chemtrails/door-without-a-door-18"
    },
    {
     "id": "0ae0553f-181c-4e66-a78e-62f894511678",
     "title": "Black Cat",
     "genre": "",
-    "art": "assets/black-cat.webp"
+    "art": "assets/black-cat.webp",
+    "sc": "/chemtrails/black-cat-5"
    },
    {
     "id": "00292715-1c8c-4ff5-a71a-c3240c2ea70c",
     "title": "Solar Groove",
     "genre": "",
-    "art": "assets/solar-groove.webp"
+    "art": "assets/solar-groove.webp",
+    "sc": "/chemtrails/solar-groove-52"
    },
    {
     "id": "24b7c8e8-5adc-4f72-afaf-06bc987aacb7",
     "title": "Astoria Storm",
     "genre": "",
-    "art": "assets/astoria-storm.webp"
+    "art": "assets/astoria-storm.webp",
+    "sc": "/chemtrails/astoria-storm-3"
    },
    {
     "id": "532b5b71-f35c-4d77-b5bb-0660e537becd",
     "title": "Neon Flies",
     "genre": "",
-    "art": "assets/neon-flies.webp"
+    "art": "assets/neon-flies.webp",
+    "sc": "/chemtrails/neon-flies-40"
    },
    {
     "id": "73f6c0c3-efcc-4c29-8755-2259eb122486",
     "title": "Blue Plate @ 27",
     "genre": "",
-    "art": "assets/blue-plate-27.webp"
+    "art": "assets/blue-plate-27.webp",
+    "sc": "/chemtrails/blue-plate-27-9"
    },
    {
     "id": "ee45b7c3-1f52-417a-9e08-f9f49fa1a103",
     "title": "Fourteen Foot Man",
     "genre": "",
-    "art": "assets/fourteen-foot-man.webp"
+    "art": "assets/fourteen-foot-man.webp",
+    "sc": "/chemtrails/fourteen-foot-man-23"
    },
    {
     "id": "50573af7-5138-4891-a496-2d6199b63111",
     "title": "Bears, Beets & Battlestar Galactica",
     "genre": "",
-    "art": "assets/bears-beets-battlestar-galactica.webp"
+    "art": "assets/bears-beets-battlestar-galactica.webp",
+    "sc": "/chemtrails/bears-beets-battlestar-galactica-4"
    },
    {
     "id": "bdef8bee-a5af-4353-96d8-6fdaa9bcc4b2",
     "title": "Don't Look Back Tonight",
     "genre": "Trip Hop",
-    "art": "assets/don-t-look-back-tonight.webp"
+    "art": "assets/don-t-look-back-tonight.webp",
+    "sc": "/chemtrails/dont-look-back-tonight-17"
    },
    {
     "id": "fd8d3909-515d-41ba-8e6b-ca3172705c5f",
     "title": "Insecure Paws",
     "genre": "",
-    "art": "assets/insecure-paws.webp"
+    "art": "assets/insecure-paws.webp",
+    "sc": "/chemtrails/insecure-paws-30"
    },
    {
     "id": "66a754bc-4dc4-465b-8749-0bcf24e25937",
     "title": "Bodega Cat",
     "genre": "",
-    "art": "assets/bodega-cat.webp"
+    "art": "assets/bodega-cat.webp",
+    "sc": "/chemtrails/bodega-cat-10"
    },
    {
     "id": "8c680f0b-c28d-48c0-9812-906503463ace",
     "title": "Cats Break Plates",
     "genre": "",
-    "art": "assets/cats-break-plates.webp"
+    "art": "assets/cats-break-plates.webp",
+    "sc": "/chemtrails/cats-break-plates-12"
    },
    {
     "id": "2006827b-85df-47e5-855a-8a10b3a6885c",
     "title": "Foghorn Stethoscope",
     "genre": "",
-    "art": "assets/foghorn-stethoscope.webp"
+    "art": "assets/foghorn-stethoscope.webp",
+    "sc": "/chemtrails/foghorn-stethoscope-22"
    },
    {
     "id": "e385337c-d9b9-4b93-a12f-3ae134674cfd",
     "title": "Cardboard Memories",
     "genre": "",
-    "art": "assets/cardboard-memories.webp"
+    "art": "assets/cardboard-memories.webp",
+    "sc": "/chemtrails/cardboard-memories-11"
    },
    {
     "id": "273a0109-1579-4bbb-9880-57ff806d9623",
     "title": "Ginger Garden",
     "genre": "",
-    "art": "assets/ginger-garden.webp"
+    "art": "assets/ginger-garden.webp",
+    "sc": "/chemtrails/ginger-garden-24"
    },
    {
     "id": "c9dc9172-0b48-4fd8-9411-380cf84d5958",
     "title": "Chrome Orbit",
     "genre": "",
-    "art": "assets/chrome-orbit.webp"
+    "art": "assets/chrome-orbit.webp",
+    "sc": "/chemtrails/chrome-orbit-13"
    },
    {
     "id": "2aa5f0bb-e44d-484d-a329-4ee400eb245f",
     "title": "Agate Beach Fugue",
     "genre": "",
-    "art": "assets/agate-beach-fugue.webp"
+    "art": "assets/agate-beach-fugue.webp",
+    "sc": "/chemtrails/agate-beach-fugue-2"
    }
   ]
  }

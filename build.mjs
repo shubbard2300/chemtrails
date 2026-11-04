@@ -20,6 +20,8 @@ const V = { css: hash("style.css"), js: hash("site.js") };
 const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
 const today = new Date().toISOString().slice(0, 10);
 const scTrack = (p) => `https://soundcloud.com${p}`;
+const SHARE_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const shareBtn = (title, url, cls = "") => `<button type="button" class="share${cls}" data-share="${esc(url)}" data-title="${esc(title)}" aria-label="Share ${esc(title)}" title="Share">${SHARE_ICON}</button>`;
 const total = records.reduce((n, r) => n + r.tracks.length, 0);
 
 // First paragraph, cut at a sentence end inside ~260 chars (always at least one sentence).
@@ -39,7 +41,7 @@ const meta = (r) => [r.year, r.genre, `${r.tracks.length} tracks`, r.total].filt
 function recPanel(r, i, page = false) {
   const flip = i % 2 ? " rec--flip" : "";
   const rows = r.tracks
-    .map(([t], k) => `<li><button type="button" data-i="${k}"><span class="n">${String(k + 1).padStart(2, "0")}</span><span class="t">${esc(t)}</span><span class="d"></span></button></li>`)
+    .map(([t, p], k) => `<li><button type="button" data-i="${k}"><span class="n">${String(k + 1).padStart(2, "0")}</span><span class="t">${esc(t)}</span><span class="d"></span></button>${shareBtn(t, scTrack(p))}</li>`)
     .join("");
   const notes = page
     ? r.desc.split(/\n\s*\n/).map((p) => `<p>${esc(p.replace(/\s*\n\s*/g, " "))}</p>`).join("")
@@ -75,7 +77,7 @@ const singleCards = singles.tracks
     const img = `<img src="/${t.art}?v=${hash(t.art)}" alt="" width="320" height="320" loading="lazy" decoding="async">`;
     const label = `<span class="s-title">${esc(t.title)}</span>${t.genre ? `<span class="s-genre">${esc(t.genre)}</span>` : ""}`;
     return singles.sc
-      ? `<button type="button" class="single" data-i="${k}">${img}${label}</button>`
+      ? `<div class="s-item"><button type="button" class="single" data-i="${k}">${img}${label}</button>${t.sc ? shareBtn(t.title, scTrack(t.sc), " share--card") : ""}</div>`
       : `<a class="single" href="https://suno.com/song/${t.id}" target="_blank" rel="noopener" data-ev="suno_click">${img}${label}<span class="s-go">Listen on Suno ↗</span></a>`;
   })
   .join("");
@@ -142,8 +144,8 @@ function layout({ title, description, path, jsonld, body, home = false }) {
   <nav class="nav">
     <a href="/" class="nav-logo">CHEMTRAILS</a>
     <div class="nav-links">
-      <a href="/#records">Records</a>
       <a href="/#singles">Singles</a>
+      <a href="/#records">Records</a>
       <a href="/#signal">The Signal</a>
       <a href="/#about">About</a>
       <a href="${SC_USER}" target="_blank" rel="noopener">SoundCloud ↗</a>
@@ -165,6 +167,7 @@ ${body}
       <button type="button" id="p-prev" aria-label="Previous track">⏮</button>
       <button type="button" id="p-play" class="player-play" aria-label="Play or pause">▶</button>
       <button type="button" id="p-next" aria-label="Next track">⏭</button>
+      <button type="button" id="p-share" class="share" aria-label="Share this track" title="Share">${SHARE_ICON}</button>
     </div>
     <div class="player-progress">
       <span class="time" id="p-now">0:00</span>
@@ -174,6 +177,7 @@ ${body}
     <a class="player-sc" id="p-sc" href="${SC_USER}" target="_blank" rel="noopener">SoundCloud ↗</a>
   </div>
   <div id="sc-host" aria-hidden="true"></div>
+  <div id="share-live" class="sr-only" role="status" aria-live="polite"></div>
   <script src="/site.js?v=${V.js}" defer></script>
 </body>
 </html>
@@ -212,22 +216,21 @@ ${SCENE}
     <div class="hero-foot" aria-hidden="true"><span>${records.length} records · ${total} tracks</span><span>Scroll ↓</span></div>
   </header>
   <main>
+    <section class="section singles" id="singles"${singles.sc ? ` data-rec="singles" data-sc="${esc(singles.sc)}" data-title="Singles" data-art="/assets/orbitz.webp?v=${hash("assets/orbitz.webp")}"` : ""}>
+      <div class="sec-head">
+        <p class="kicker">Singles</p>
+        <h2>Loose transmissions</h2>
+      </div>
+      <div class="single-grid">${singleCards}</div>
+      <button type="button" class="btn btn-line singles-more" data-more hidden>Show all ${singles.tracks.length} songs</button>
+    </section>
+
     <section class="records" id="records">
       <div class="sec-head">
         <p class="kicker">The records</p>
         <h2>${records.length} records.<br>Played straight from SoundCloud.</h2>
       </div>
 ${records.map((r, i) => recPanel(r, i)).join("\n")}
-    </section>
-
-    <section class="section singles" id="singles"${singles.sc ? ` data-rec="singles" data-sc="${esc(singles.sc)}" data-title="Singles" data-art="/assets/orbitz.webp?v=${hash("assets/orbitz.webp")}"` : ""}>
-      <div class="sec-head">
-        <p class="kicker">Singles</p>
-        <h2>Loose transmissions</h2>
-        <p class="sec-sub">${singles.tracks.length} songs made with Suno. ${singles.sc ? "Streaming from SoundCloud." : "They play on Suno for now and are moving to SoundCloud."}</p>
-      </div>
-      <div class="single-grid">${singleCards}</div>
-      <button type="button" class="btn btn-line singles-more" data-more hidden>Show all ${singles.tracks.length} songs</button>
     </section>
 
     <section class="section" id="merch">

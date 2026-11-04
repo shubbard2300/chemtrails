@@ -27,15 +27,15 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=38e713a2">
+  <link rel="stylesheet" href="/style.css?v=0d052865">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
   <nav class="nav">
     <a href="/" class="nav-logo">CHEMTRAILS</a>
     <div class="nav-links">
-      <a href="/#records">Records</a>
       <a href="/#singles">Singles</a>
+      <a href="/#records">Records</a>
       <a href="/#signal">The Signal</a>
       <a href="/#about">About</a>
       <a href="https://soundcloud.com/chemtrails" target="_blank" rel="noopener">SoundCloud ↗</a>
@@ -61,7 +61,7 @@
         
         <a class="btn-link" href="https://soundcloud.com/chemtrails/sets/bombing-at-starbucks" target="_blank" rel="noopener" data-ev="soundcloud_click">SoundCloud ↗</a>
       </div>
-      <ol class="tracks"><li><button type="button" data-i="0"><span class="n">01</span><span class="t">Bombing At Starbucks</span><span class="d"></span></button></li><li><button type="button" data-i="1"><span class="n">02</span><span class="t">The Black Lodge</span><span class="d"></span></button></li><li><button type="button" data-i="2"><span class="n">03</span><span class="t">No Martians</span><span class="d"></span></button></li></ol>
+      <ol class="tracks"><li><button type="button" data-i="0"><span class="n">01</span><span class="t">Bombing At Starbucks</span><span class="d"></span></button><button type="button" class="share" data-share="https://soundcloud.com/chemtrails/bombing-at-starbucks" data-title="Bombing At Starbucks" aria-label="Share Bombing At Starbucks" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li><li><button type="button" data-i="1"><span class="n">02</span><span class="t">The Black Lodge</span><span class="d"></span></button><button type="button" class="share" data-share="https://soundcloud.com/chemtrails/black-lodge" data-title="The Black Lodge" aria-label="Share The Black Lodge" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li><li><button type="button" data-i="2"><span class="n">03</span><span class="t">No Martians</span><span class="d"></span></button><button type="button" class="share" data-share="https://soundcloud.com/chemtrails/no-martians" data-title="No Martians" aria-label="Share No Martians" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li></ol>
     </div>
   </div>
 </article>
@@ -82,6 +82,7 @@
       <button type="button" id="p-prev" aria-label="Previous track">⏮</button>
       <button type="button" id="p-play" class="player-play" aria-label="Play or pause">▶</button>
       <button type="button" id="p-next" aria-label="Next track">⏭</button>
+      <button type="button" id="p-share" class="share" aria-label="Share this track" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
     <div class="player-progress">
       <span class="time" id="p-now">0:00</span>
@@ -91,6 +92,7 @@
     <a class="player-sc" id="p-sc" href="https://soundcloud.com/chemtrails" target="_blank" rel="noopener">SoundCloud ↗</a>
   </div>
   <div id="sc-host" aria-hidden="true"></div>
-  <script src="/site.js?v=afc8d936" defer></script>
+  <div id="share-live" class="sr-only" role="status" aria-live="polite"></div>
+  <script src="/site.js?v=c81b9b6d" defer></script>
 </body>
 </html>
