@@ -376,13 +376,6 @@
     "sc": "/chemtrails/starry-eyes-53"
    },
    {
-    "id": "ff90fe16-c008-415a-b1b3-81588649a836",
-    "title": "Grief in Sequins",
-    "genre": "",
-    "art": "assets/grief-in-sequins.webp",
-    "sc": "/chemtrails/grief-in-sequins-26"
-   },
-   {
     "id": "58b96d52-784f-46fc-8953-d5852c6ab7f4",
     "title": "Coastal Cathedral",
     "genre": "Disco",
@@ -409,13 +402,6 @@
     "genre": "",
     "art": "assets/silk-smoke-wishes.webp",
     "sc": "/chemtrails/silk-smoke-wishes-51"
-   },
-   {
-    "id": "373efa85-0969-4cfd-80f6-7a1e2c9d3484",
-    "title": "Blue Eyes of Gold",
-    "genre": "",
-    "art": "assets/blue-eyes-of-gold.webp",
-    "sc": "/chemtrails/blue-eyes-of-gold-7"
    },
    {
     "id": "4cba3ba6-f7e5-4bb4-a421-d50d293eeb73",
@@ -521,13 +507,6 @@
     "genre": "",
     "art": "assets/shot-gun-night.webp",
     "sc": "/chemtrails/shot-gun-night-50"
-   },
-   {
-    "id": "6ef1442f-3c29-4081-baaa-eae66f5760ed",
-    "title": "Escaping",
-    "genre": "",
-    "art": "assets/escaping.webp",
-    "sc": "/chemtrails/escaping-21"
    },
    {
     "id": "48479b0c-aae9-4bae-b278-69490373f7b5",
@@ -677,13 +656,6 @@
     "sc": "/chemtrails/blue-line-8"
    },
    {
-    "id": "15a95331-c989-4cd1-a612-ba0801e24ae9",
-    "title": "AM Radio Vampires",
-    "genre": "",
-    "art": "assets/am-radio-vampires.webp",
-    "sc": "/chemtrails/am-radio-vampires-1"
-   },
-   {
     "id": "12cc0489-ee5e-4c0d-81e7-0f884f1715dd",
     "title": "Dust on My Boots",
     "genre": "",
@@ -808,6 +780,13 @@
     "genre": "",
     "art": "assets/agate-beach-fugue.webp",
     "sc": "/chemtrails/agate-beach-fugue-2"
+   },
+   {
+    "id": "ff90fe16-c008-415a-b1b3-81588649a836",
+    "title": "Grief in Sequins",
+    "genre": "",
+    "art": "assets/grief-in-sequins.webp",
+    "sc": "/chemtrails/grief-in-sequins-26"
    }
   ]
  }

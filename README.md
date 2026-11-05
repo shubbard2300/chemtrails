@@ -18,7 +18,7 @@ Every record is a fragment of a larger story.
 
 ## The site
 
-Static site on Vercel at [chemtrails-music.com](https://www.chemtrails-music.com/). Redesigned 2026-11-01: a title-sequence look (Techniscope letterbox bars, 1960s-70s Italian space-age colour, spaghetti-western dusk, layered parallax). **Audio plays from SoundCloud**: six records, each a SoundCloud set, driven by a custom player over SoundCloud's Widget API. The 65 Suno songs are a Singles shelf played from the SoundCloud set `loose-transmissions` (Suno's audio CDN went private); `singles.tracks` must stay in the set's order, because card k plays set track k.
+Static site on Vercel at [chemtrails-music.com](https://www.chemtrails-music.com/). Redesigned 2026-11-01: a title-sequence look (Techniscope letterbox bars, 1960s-70s Italian space-age colour, spaghetti-western dusk, layered parallax). **Audio plays from SoundCloud**: six records, each a SoundCloud set, driven by a custom player over SoundCloud's Widget API. The Suno songs (62) are a Singles shelf played from the SoundCloud set `loose-transmissions` (Suno's audio CDN went private); `singles.tracks` must stay in the set's order, because card k plays set track k.
 
 - `content/records.json` is the content: six records (title, colour, SoundCloud set URL, track list, liner notes) and the singles. Edit it, then `node build.mjs`
 - `build.mjs` generates `index.html`, `records/<slug>/index.html`, `sitemap.xml` and `llms.txt`. Never hand-edit those
