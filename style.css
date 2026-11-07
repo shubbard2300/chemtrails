@@ -347,6 +347,61 @@ h2 {
 .merch-cta-btn { flex-shrink: 0; }
 @media (max-width: 760px) { .merch-cta { flex-direction: column; text-align: center; gap: 18px; } }
 
+/* now showing: the music video card, its page and the modal */
+.nowshowing { background: var(--ink); }
+.ns-grid { display: grid; grid-template-columns: minmax(280px, 7fr) 5fr; gap: clamp(28px, 5vw, 72px); align-items: center; max-width: 1320px; margin: 0 auto; }
+.ns-poster {
+  position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; overflow: hidden;
+  background: var(--ink-2); border: 6px solid var(--bone); box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55); cursor: pointer;
+}
+.ns-poster img { width: 100%; height: 100%; object-fit: cover; filter: sepia(0.2) saturate(0.95); transition: transform 0.5s, filter 0.3s; }
+.ns-poster:hover img, .ns-poster:focus-visible img { transform: scale(1.03); filter: none; }
+.ns-play {
+  position: absolute; inset: 0; margin: auto; display: grid; place-items: center; padding-left: 0.12em;
+  width: clamp(64px, 9vw, 104px); height: clamp(64px, 9vw, 104px); border-radius: 50%;
+  background: var(--ochre); color: var(--ink); font-size: clamp(22px, 3vw, 34px);
+  box-shadow: 0 0 0 10px rgba(227, 161, 63, 0.28); transition: transform 0.2s, background 0.2s;
+}
+.ns-poster:hover .ns-play, .ns-poster:focus-visible .ns-play { transform: scale(1.08); background: var(--bone); }
+.ns-time { position: absolute; right: 10px; bottom: 10px; padding: 3px 8px; background: rgba(13, 9, 7, 0.82); color: var(--bone); font-size: 12px; letter-spacing: 0.14em; }
+.ns-copy h2 { margin: 14px 0 18px; font-size: clamp(40px, 5.5vw, 84px); }
+.ns-copy p:not(.kicker) { color: var(--bone-dim); font-size: 17px; max-width: 46ch; }
+@media (max-width: 900px) { .ns-grid { grid-template-columns: 1fr; } }
+
+.vmodal {
+  width: min(1100px, calc(100vw - 24px)); max-width: none; max-height: calc(100dvh - 24px);
+  padding: 0; border: 0; margin: auto; background: transparent; color: var(--bone); overflow: visible;
+}
+.vmodal::backdrop { background: rgba(13, 9, 7, 0.92); backdrop-filter: blur(6px); }
+.vm-in { background: var(--ink); border: 1px solid var(--line); }
+.vm-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 8px 8px 16px; }
+.vm-title { font-family: var(--display); text-transform: uppercase; letter-spacing: 0.06em; font-size: 18px; line-height: 1.2; }
+.vm-close { flex-shrink: 0; width: 44px; height: 44px; background: none; border: 1px solid var(--line); color: var(--bone); font-size: 18px; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+.vm-close:hover { color: var(--ochre); border-color: var(--ochre); }
+.vm-frame { aspect-ratio: 16 / 9; background: #000; }
+.vm-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.vm-foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 12px 16px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bone-dim); }
+.vm-foot a { text-decoration: none; }
+.vm-foot a:hover { color: var(--ochre); }
+html:has(.vmodal[open]) { overflow: hidden; }
+
+.video-page .vp { padding-top: calc(var(--bar) + clamp(40px, 6vw, 90px)); }
+.vp-inner { max-width: 1100px; margin: 0 auto; }
+.vp-title { margin-top: 12px; font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(46px, 8vw, 120px); line-height: 0.92; overflow-wrap: anywhere; }
+.vp-by { margin-top: 10px; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bone-dim); }
+.vp-player { margin: 34px 0; aspect-ratio: 16 / 9; background: #000; border: 6px solid var(--bone); box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55); }
+.vp-player .ns-poster { height: 100%; border: 0; box-shadow: none; }
+.vp-player iframe { display: block; width: 100%; height: 100%; border: 0; }
+.vp-text > p { color: var(--bone-dim); font-size: 17px; max-width: 62ch; margin-bottom: 22px; }
+
+/* at a glance: short facts, in the About section and on the video page */
+.glance { display: grid; grid-template-columns: max-content 1fr; gap: 8px 22px; margin: 0 0 26px; padding: 18px 0; border-block: 1px solid var(--line); max-width: 62ch; }
+.glance dt { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ochre); font-weight: 500; padding-top: 3px; }
+.glance dd { color: var(--bone); }
+.glance a { text-decoration-color: var(--line); text-underline-offset: 3px; }
+.glance a:hover { color: var(--ochre); }
+@media (max-width: 560px) { .glance { grid-template-columns: 1fr; gap: 2px; } .glance dd { margin-bottom: 10px; } }
+
 /* the signal — rust slab with Futurist diagonals */
 .signal {
   --slant: clamp(28px, 5vw, 76px);
@@ -464,5 +519,5 @@ h2 {
   .hero::before, .hero::after, .rays, .hero-kicker, .hero-title, .hero-row, .onair-lamp, .tracks li.is-playing .n { animation: none; }
   .trails path { animation: none; stroke-dashoffset: 0; }
   .layer, .hero-copy, .rec-bg, .rec-ghost, .rec-poster img { transform: none !important; }
-  .btn, .single img, .merch-thumbs img, .tier, .more-grid img { transition: none; }
+  .btn, .single img, .merch-thumbs img, .tier, .more-grid img, .ns-poster img, .ns-play { transition: none; }
 }

@@ -209,7 +209,7 @@
     }
   });
   document.addEventListener("keydown", (e) => {
-    if (e.code === "Space" && cur && !["INPUT", "TEXTAREA", "BUTTON", "A"].includes(e.target.tagName)) {
+    if (e.code === "Space" && cur && !$("dialog[open]") && !["INPUT", "TEXTAREA", "BUTTON", "A"].includes(e.target.tagName)) {
       e.preventDefault();
       cur.widget.toggle();
     }
@@ -260,6 +260,42 @@
     const inBar = b.id === "p-share";
     share(b, inBar ? bar.sc.href : b.dataset.share, inBar ? bar.title.textContent : b.dataset.title);
   });
+
+  // ---------- music video: the YouTube player is created on open and removed on close, so nothing loads up front ----------
+  const ytFrame = (id, title) => `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" title="${title}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+  const vm = $("#video-modal");
+  if (vm) {
+    const frame = $("#vm-frame");
+    const openVideo = (placement) => {
+      if (!vm.showModal) { location.href = vm.dataset.page; return; } // no <dialog>: go to the video page
+      if (cur) cur.widget.pause(); // one thing playing at a time
+      frame.innerHTML = ytFrame(vm.dataset.yt, vm.getAttribute("aria-label"));
+      vm.showModal();
+      history.replaceState(null, "", "#watch");
+      track("video_open", { video: "lesbian-pet-wedding", placement });
+    };
+    vm.addEventListener("close", () => {
+      frame.innerHTML = ""; // removing the iframe stops the video
+      if (location.hash === "#watch") history.replaceState(null, "", location.pathname + location.search);
+    });
+    document.addEventListener("click", (e) => {
+      const o = e.target.closest("[data-video-open]");
+      if (o) { openVideo(o.dataset.videoOpen); return; }
+      if (e.target === vm || e.target.closest("[data-video-close]")) vm.close(); // vm itself is only the backdrop
+    });
+    if (location.hash === "#watch") openVideo("link");
+    addEventListener("hashchange", () => { if (location.hash === "#watch" && !vm.open) openVideo("link"); });
+  }
+  const vpPlay = $("[data-vp-play]");
+  if (vpPlay) {
+    vpPlay.addEventListener("click", () => {
+      const box = $("#vp-player");
+      if (cur) cur.widget.pause();
+      box.innerHTML = ytFrame(box.dataset.yt, box.dataset.title);
+      $("iframe", box).focus();
+      track("video_open", { video: "lesbian-pet-wedding", placement: "video-page" });
+    });
+  }
 
   // ---------- analytics ----------
   document.addEventListener("click", (e) => {

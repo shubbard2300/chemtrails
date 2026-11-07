@@ -24,6 +24,32 @@ const SHARE_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v1
 const shareBtn = (title, url, cls = "") => `<button type="button" class="share${cls}" data-share="${esc(url)}" data-title="${esc(title)}" aria-label="Share ${esc(title)}" title="Share">${SHARE_ICON}</button>`;
 const total = records.reduce((n, r) => n + r.tracks.length, 0);
 
+// The music video (YouTube, Chemtrails channel). Page at VIDEO_PATH; a modal on the home page plays it on click.
+const YT = { id: "5M-bsChciaY", channel: "https://www.youtube.com/channel/UCBp1ER64T6_AvGpECk63Z6g" };
+const VIDEO = {
+  slug: "lesbian-pet-wedding",
+  title: "Lesbian Pet Wedding (Official Music Video)",
+  song: "Lesbian Pet Wedding",
+  record: "companion-weather",
+  duration: "PT4M31S",
+  length: "4:31",
+  uploaded: "2026-11-07",
+  desc: "Official music video for \"Lesbian Pet Wedding\" by Chemtrails, a synth-rock project from Portland, Oregon. A 1970s home-movie wedding for Olive and Mika, with the band playing the reception.",
+  alt: "Olive the dog and Mika the cat in wedding veils, a still from the music video",
+};
+const VIDEO_PATH = `/videos/${VIDEO.slug}/`;
+const POSTER = `/assets/video/lesbian-pet-wedding.webp?v=${hash("assets/video/lesbian-pet-wedding.webp")}`;
+const BAND_ID = SITE + "/#band";
+const crumbs = (items) => ({ "@type": "BreadcrumbList", itemListElement: items.map(([name, path], i) => ({ "@type": "ListItem", position: i + 1, name, item: SITE + path })) });
+const videoDialog = `
+  <dialog class="vmodal" id="video-modal" data-yt="${YT.id}" data-page="${VIDEO_PATH}" aria-label="${esc(VIDEO.title)}">
+    <div class="vm-in">
+      <div class="vm-bar"><span class="vm-title">${esc(VIDEO.title)}</span><button type="button" class="vm-close" data-video-close aria-label="Close video">✕</button></div>
+      <div class="vm-frame" id="vm-frame"></div>
+      <p class="vm-foot"><a href="${VIDEO_PATH}">Video page</a><a href="https://youtu.be/${YT.id}" target="_blank" rel="noopener" data-ev="youtube_click">Watch on YouTube ↗</a></p>
+    </div>
+  </dialog>`;
+
 // First paragraph, cut at a sentence end inside ~260 chars (always at least one sentence).
 function blurb(desc) {
   const para = (desc.split(/\n\s*\n/)[0] || "").replace(/\s*\n\s*/g, " ").trim();
@@ -53,7 +79,7 @@ function recPanel(r, i, page = false) {
   <div class="rec-ghost" aria-hidden="true">${esc(r.title)}</div>
   <div class="rec-inner">
     <div class="rec-poster">
-      <img src="/assets/records/${r.slug}-thumb.webp" srcset="/assets/records/${r.slug}-thumb.webp 480w, /assets/records/${r.slug}.webp 1200w" sizes="(max-width: 900px) 80vw, 440px" width="480" height="480" alt="${esc(r.title)} cover art"${page ? ' fetchpriority="high"' : i > 0 ? ' loading="lazy"' : ""} decoding="async">
+      <img src="/assets/records/${r.slug}-thumb.webp" srcset="/assets/records/${r.slug}-thumb.webp 480w, /assets/records/${r.slug}.webp 1200w" sizes="(max-width: 900px) 80vw, 440px" width="480" height="480" alt="${esc(r.title)} album cover art by Chemtrails"${page ? ' fetchpriority="high"' : i > 0 ? ' loading="lazy"' : ""} decoding="async">
       <span class="rec-no">No.&nbsp;${ROMAN[i]}</span>
     </div>
     <div class="rec-body">
@@ -106,8 +132,9 @@ const SCENE = `
   </svg>
 </div>`;
 
-function layout({ title, description, path, jsonld, body, home = false }) {
+function layout({ title, description, path, jsonld, body, home = false, ogType = home ? "website" : "music.album", image = "/assets/og-image.jpeg", modal = false }) {
   const url = SITE + path;
+  const img = SITE + image;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,16 +146,16 @@ function layout({ title, description, path, jsonld, body, home = false }) {
   <meta property="og:site_name" content="Chemtrails">
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
-  <meta property="og:image" content="${SITE}/assets/og-image.jpeg">
+  <meta property="og:image" content="${img}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="${url}">
-  <meta property="og:type" content="${home ? "website" : "music.album"}">
+  <meta property="og:type" content="${ogType}">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(description)}">
-  <meta name="twitter:image" content="${SITE}/assets/og-image.jpeg">
+  <meta name="twitter:image" content="${img}">
   <meta name="theme-color" content="#0d0907">
   <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=${GA}"></script>
@@ -144,6 +171,7 @@ function layout({ title, description, path, jsonld, body, home = false }) {
   <nav class="nav">
     <a href="/" class="nav-logo">CHEMTRAILS</a>
     <div class="nav-links">
+      <a href="/#video">Video</a>
       <a href="/#singles">Singles</a>
       <a href="/#records">Records</a>
       <a href="/#signal">The Signal</a>
@@ -156,10 +184,11 @@ ${body}
     <span>© 2026 Chemtrails</span>
     <div class="footer-links">
       <a href="${SC_USER}" target="_blank" rel="noopener">SoundCloud</a>
+      <a href="${YT.channel}" target="_blank" rel="noopener" data-ev="youtube_click">YouTube</a>
       <a href="${SUNO}" target="_blank" rel="noopener">Suno</a>
       <a href="${SHOP}?utm_source=chemtrails-music.com&utm_medium=footer&utm_campaign=merch" target="_blank" rel="noopener">Shop</a>
     </div>
-  </footer>
+  </footer>${modal ? videoDialog : ""}
   <div class="player" id="player" hidden>
     <img class="player-art" id="p-art" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" width="52" height="52">
     <div class="player-meta"><span class="player-title" id="p-title"></span><span class="player-rec" id="p-rec"></span></div>
@@ -184,7 +213,7 @@ ${body}
 `;
 }
 
-const artist = { "@type": "MusicGroup", name: "Chemtrails", url: SITE + "/" };
+const artist = { "@type": "MusicGroup", "@id": BAND_ID, name: "Chemtrails", url: SITE + "/" };
 const albumLd = (r) => ({
   "@type": "MusicAlbum",
   name: r.title,
@@ -209,6 +238,7 @@ ${SCENE}
         <p class="hero-line">Imagining the future that the past thought it was going to become.</p>
         <div class="hero-actions">
           <button type="button" class="btn btn-solid" id="hero-play" data-rec-target="${records[0].slug}">▶&nbsp;&nbsp;Play ${esc(records[0].title)}</button>
+          <button type="button" class="btn btn-line" data-video-open="hero">▶&nbsp;&nbsp;Watch the video</button>
           <a class="btn btn-line" href="#records">The records</a>
         </div>
       </div>
@@ -216,6 +246,24 @@ ${SCENE}
     <div class="hero-foot" aria-hidden="true"><span>${records.length} records · ${total} tracks</span><span>Scroll ↓</span></div>
   </header>
   <main>
+    <section class="section nowshowing" id="video">
+      <div class="ns-grid">
+        <button type="button" class="ns-poster" data-video-open="card" aria-label="Watch the music video for ${esc(VIDEO.song)} (${VIDEO.length})">
+          <img src="${POSTER}" alt="${esc(VIDEO.alt)}" width="1280" height="720" loading="lazy" decoding="async">
+          <span class="ns-play" aria-hidden="true">▶</span><span class="ns-time" aria-hidden="true">${VIDEO.length}</span>
+        </button>
+        <div class="ns-copy">
+          <p class="kicker">Now showing</p>
+          <h2>${esc(VIDEO.song)}</h2>
+          <p>The music video. A 1970s home-movie wedding for Olive and Mika, with the band playing the reception.</p>
+          <div class="rec-actions">
+            <button type="button" class="btn btn-solid" data-video-open="card-button">▶&nbsp;&nbsp;Watch the video</button>
+            <a class="btn-link" href="${VIDEO_PATH}">Video page</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section singles" id="singles"${singles.sc ? ` data-rec="singles" data-sc="${esc(singles.sc)}" data-title="Singles" data-art="/assets/orbitz.webp?v=${hash("assets/orbitz.webp")}"` : ""}>
       <div class="sec-head">
         <p class="kicker">Singles</p>
@@ -280,6 +328,13 @@ ${records.map((r, i) => recPanel(r, i)).join("\n")}
         <div class="about-photo"><img src="/assets/avatar.webp" alt="Chemtrails" loading="lazy" decoding="async" width="640" height="640"></div>
         <div class="about-text">
           <p class="kicker">About</p>
+          <dl class="glance">
+            <dt>Chemtrails is</dt><dd>a synth-rock music project from Portland, Oregon</dd>
+            <dt>Sound</dt><dd>dreamy synth rock, cosmic disco, psychedelic pop, vintage science fiction</dd>
+            <dt>Catalog</dt><dd>${records.length} records (${total} tracks) and ${singles.tracks.length} singles</dd>
+            <dt>Newest</dt><dd>the music video for "${esc(VIDEO.song)}" (2026)</dd>
+            <dt>Listen</dt><dd><a href="${SC_USER}" target="_blank" rel="noopener">SoundCloud</a> and <a href="${YT.channel}" target="_blank" rel="noopener" data-ev="youtube_click">YouTube</a></dd>
+          </dl>
           <p>A West Coast musician and producer who records as Chemtrails: a solo project built on ambient texture, cinematic atmosphere, and the gray weight of Pacific Northwest fog.</p>
           <p>Born on the Oregon coast, he picked up a trumpet at six and never really stopped chasing sound. His instincts formed early, shaped by the records that filled the rooms of his childhood, deepened by the rave and DJ culture of Portland and San Francisco, and refined across decades of band work, studio obsession, and an unrelenting appetite for what sound can do to a room.</p>
           <p>He's moved through bands, genres, and roles (guitarist, then keyboardist and producer with Venus In Spurs, into the experimental rock terrain of Terra Firma), each chapter pushing further into the territory where performance bleeds into atmosphere.</p>
@@ -291,21 +346,29 @@ ${records.map((r, i) => recPanel(r, i)).join("\n")}
   </main>`;
 
 const home = layout({
-  title: "CHEMTRAILS — Retro-Futuristic Synth-Rock from Portland, Oregon",
-  description: "Retro-futuristic synth-rock from Portland, Oregon. Stream six records, including Companion Weather, Spanish For Night Owls and AM Radio.",
+  title: "Chemtrails: Synth-Rock Band from Portland, Oregon",
+  description: `Chemtrails is a synth-rock band from Portland, Oregon. Watch the music video, stream ${records.length} records and ${singles.tracks.length} singles, and shop the merch.`,
   path: "/",
   home: true,
+  modal: true,
   body: homeBody,
   jsonld: {
     "@context": "https://schema.org",
-    ...artist,
-    image: `${SITE}/assets/avatar.jpeg`,
-    logo: `${SITE}/assets/avatar.jpeg`,
-    description: "A retro-futuristic synth-rock project exploring the strange space between memory, technology, desire, and the unknown. Dreamy synth rock, cosmic disco, psychedelic pop, and vintage science fiction from the Pacific Northwest.",
-    genre: ["Synth-Rock", "Ambient", "Cosmic Disco", "Psychedelic Pop"],
-    foundingLocation: { "@type": "Place", name: "Portland, Oregon, United States" },
-    sameAs: [SC_USER, SUNO, SHOP],
-    album: records.map((r) => ({ "@type": "MusicAlbum", name: r.title, url: `${SITE}/records/${r.slug}/`, numTracks: r.tracks.length })),
+    "@graph": [
+      { "@type": "WebSite", "@id": SITE + "/#site", url: SITE + "/", name: "Chemtrails", alternateName: ["Chemtrails Music", "Chemtrails band"], inLanguage: "en", publisher: { "@id": BAND_ID } },
+      {
+        ...artist,
+        alternateName: ["Chemtrails band", "Chemtrails Music"],
+        disambiguatingDescription: "A synth-rock music project from Portland, Oregon. Not related to the chemtrail conspiracy theory.",
+        image: `${SITE}/assets/avatar.jpeg`,
+        logo: `${SITE}/assets/avatar.jpeg`,
+        description: "A retro-futuristic synth-rock project exploring the strange space between memory, technology, desire, and the unknown. Dreamy synth rock, cosmic disco, psychedelic pop, and vintage science fiction from the Pacific Northwest.",
+        genre: ["Synth-Rock", "Ambient", "Cosmic Disco", "Psychedelic Pop"],
+        foundingLocation: { "@type": "Place", name: "Portland, Oregon, United States" },
+        sameAs: [SC_USER, YT.channel, SUNO, SHOP],
+        album: records.map((r) => ({ "@type": "MusicAlbum", name: r.title, url: `${SITE}/records/${r.slug}/`, numTracks: r.tracks.length })),
+      },
+    ],
   },
 });
 writeFileSync(join(ROOT, "index.html"), home);
@@ -321,14 +384,79 @@ records.forEach((r, i) => {
     description: desc,
     path: `/records/${r.slug}/`,
     body: `\n  <main class="record-page">${recPanel(r, i, true)}\n    <section class="section more-records"><p class="kicker">More records</p><div class="more-grid">${others}</div></section>\n  </main>`,
-    jsonld: { "@context": "https://schema.org", ...albumLd(r) },
+    jsonld: { "@context": "https://schema.org", "@graph": [albumLd(r), crumbs([["Chemtrails", "/"], [r.title, `/records/${r.slug}/`]])] },
   });
   mkdirSync(join(ROOT, "records", r.slug), { recursive: true });
   writeFileSync(join(ROOT, "records", r.slug, "index.html"), page);
 });
 
+// ---------- video page ----------
+const vRecord = records.find((r) => r.slug === VIDEO.record);
+const vTrack = vRecord.tracks.find(([t]) => t === VIDEO.song);
+const songUrl = scTrack(vTrack[1]);
+const videoUrl = SITE + VIDEO_PATH;
+const videoLd = {
+  "@type": "VideoObject",
+  "@id": videoUrl + "#video",
+  name: VIDEO.title,
+  description: VIDEO.desc,
+  url: videoUrl,
+  thumbnailUrl: [`${SITE}/assets/video/lesbian-pet-wedding-og.jpeg`, `${SITE}/assets/video/lesbian-pet-wedding.webp`],
+  uploadDate: VIDEO.uploaded,
+  duration: VIDEO.duration,
+  embedUrl: `https://www.youtube.com/embed/${YT.id}`,
+  inLanguage: "en",
+  musicBy: artist,
+  publisher: artist,
+  about: { "@type": "MusicRecording", name: VIDEO.song, url: songUrl, byArtist: artist, inAlbum: { "@type": "MusicAlbum", name: vRecord.title, url: `${SITE}/records/${vRecord.slug}/` } },
+};
+const videoBody = `
+  <main class="video-page">
+    <article class="section vp">
+      <div class="vp-inner">
+        <p class="kicker">Music video · ${VIDEO.length}</p>
+        <h1 class="vp-title">${esc(VIDEO.song)}</h1>
+        <p class="vp-by">Official music video · Chemtrails</p>
+        <div class="vp-player" id="vp-player" data-yt="${YT.id}" data-title="${esc(VIDEO.title)}">
+          <button type="button" class="ns-poster" data-vp-play aria-label="Play the music video for ${esc(VIDEO.song)}">
+            <img src="${POSTER}" alt="${esc(VIDEO.alt)}" width="1280" height="720" fetchpriority="high" decoding="async">
+            <span class="ns-play" aria-hidden="true">▶</span><span class="ns-time" aria-hidden="true">${VIDEO.length}</span>
+          </button>
+          <noscript><iframe src="https://www.youtube-nocookie.com/embed/${YT.id}?rel=0" title="${esc(VIDEO.title)}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></noscript>
+        </div>
+        <div class="vp-text">
+          <p>${esc(VIDEO.desc)}</p>
+          <dl class="glance">
+            <dt>Music</dt><dd>Chemtrails</dd>
+            <dt>Starring</dt><dd>Mika and Olive</dd>
+            <dt>Length</dt><dd>${VIDEO.length}</dd>
+            <dt>Released</dt><dd>2026</dd>
+            <dt>The song</dt><dd><a href="/records/${vRecord.slug}/">${esc(VIDEO.song)}</a>, from the record ${esc(vRecord.title)}</dd>
+            <dt>Made with</dt><dd>AI-generated footage, edited by hand. The song was made with Suno.</dd>
+          </dl>
+          <div class="rec-actions">
+            <a class="btn btn-solid" href="https://youtu.be/${YT.id}" target="_blank" rel="noopener" data-ev="youtube_click">Watch on YouTube ↗</a>
+            <a class="btn btn-line" href="${songUrl}" target="_blank" rel="noopener" data-ev="soundcloud_click">Listen on SoundCloud ↗</a>
+            <a class="btn-link" href="/">More Chemtrails</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>`;
+const videoPage = layout({
+  title: `${VIDEO.title} | Chemtrails`,
+  description: `Official music video for "${VIDEO.song}" by Chemtrails, a synth-rock project from Portland, Oregon. A 1970s home-movie wedding for Olive and Mika.`,
+  path: VIDEO_PATH,
+  ogType: "video.other",
+  image: "/assets/video/lesbian-pet-wedding-og.jpeg",
+  body: videoBody,
+  jsonld: { "@context": "https://schema.org", "@graph": [videoLd, crumbs([["Chemtrails", "/"], [VIDEO.song + " (music video)", VIDEO_PATH]])] },
+});
+mkdirSync(join(ROOT, "videos", VIDEO.slug), { recursive: true });
+writeFileSync(join(ROOT, "videos", VIDEO.slug, "index.html"), videoPage);
+
 // ---------- sitemap + llms.txt ----------
-const urls = ["/", ...records.map((r) => `/records/${r.slug}/`)];
+const urls = ["/", VIDEO_PATH, ...records.map((r) => `/records/${r.slug}/`)];
 writeFileSync(
   join(ROOT, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
@@ -339,33 +467,43 @@ writeFileSync(
   join(ROOT, "llms.txt"),
   `# Chemtrails
 
-> Chemtrails is a retro-futuristic synth-rock project from Portland, Oregon, exploring the strange space between memory, technology, desire, and the unknown. The music blends dreamy synth rock, cosmic disco, psychedelic pop, and vintage science fiction.
+> Chemtrails is a retro-futuristic synth-rock music project from Portland, Oregon, exploring the strange space between memory, technology, desire, and the unknown. The music blends dreamy synth rock, cosmic disco, psychedelic pop, and vintage science fiction. It is not related to the chemtrail conspiracy theory.
+
+## Key facts
+
+- Genre: synth-rock, cosmic disco, psychedelic pop, ambient
+- Based in: Portland, Oregon, United States
+- Catalog: ${records.length} records (${total} tracks) and ${singles.tracks.length} singles, streamable on SoundCloud
+- Newest: the music video for "${VIDEO.song}" (2026, ${VIDEO.length})
+
+## Pages
+
+- [Chemtrails home](${SITE}/): the records, the singles shelf, the video, merch and about
+- [${VIDEO.song} (official music video)](${videoUrl}): a 1970s home-movie wedding for Olive and Mika, ${VIDEO.length}, with credits and links to the song
 
 ## Records (streamable on the site, hosted on SoundCloud)
 
-${records.map((r) => `- ${r.title}${r.year ? ` (${r.year})` : ""}, ${r.tracks.length} tracks: ${SITE}/records/${r.slug}/`).join("\n")}
+${records.map((r) => `- [${r.title}](${SITE}/records/${r.slug}/): ${[r.year, r.genre, `${r.tracks.length} tracks`].filter(Boolean).join(", ")}`).join("\n")}
 
-## Music elsewhere
+## Listen and support
 
-- SoundCloud: ${SC_USER}
-- Singles made with Suno: ${SUNO}
-- Support: tip jar via PayPal (https://www.paypal.com/ncp/payment/W5HUHU7FYFXY8) and merch at ${SHOP}
+- [SoundCloud](${SC_USER}): the full catalog
+- [YouTube](${YT.channel}): the music video
+- [Suno](${SUNO}): singles made with Suno
+- [Merch](${SHOP}): hoodies, tees and mugs, printed on demand
+- [Tip jar](https://www.paypal.com/ncp/payment/W5HUHU7FYFXY8): support new recordings
 
 ## About
 
 The artist behind Chemtrails is a West Coast musician and producer born on the Oregon coast, formerly guitarist, keyboardist, and producer with Venus In Spurs and Terra Firma. The solo work is built on ambient texture, cinematic atmosphere, and Pacific Northwest fog.
-
-## Links
-
-- Website: ${SITE}/
 `
 );
 
 // Fail loudly on a broken internal link.
-const known = new Set(["/", ...records.map((r) => `/records/${r.slug}/`)]);
-for (const html of [home, ...records.map((r) => readFileSync(join(ROOT, "records", r.slug, "index.html"), "utf8"))]) {
+const known = new Set(["/", VIDEO_PATH, ...records.map((r) => `/records/${r.slug}/`)]);
+for (const html of [home, videoPage, ...records.map((r) => readFileSync(join(ROOT, "records", r.slug, "index.html"), "utf8"))]) {
   for (const [, href] of html.matchAll(/href="(\/[^"#?]*)/g)) {
     if (!/\.\w+$/.test(href) && !known.has(href)) throw new Error(`broken internal link: ${href}`);
   }
 }
-console.log(`built: ${urls.length} pages, ${records.length} records, ${total} tracks, ${singles.tracks.length} singles`);
+console.log(`built: ${urls.length} pages (incl. the video page), ${records.length} records, ${total} tracks, ${singles.tracks.length} singles`);
