@@ -215,6 +215,14 @@
     }
   });
 
+  // hero play button: a random record each visit (the HTML default stays the first, for crawlers and no-JS)
+  const heroPlay = $("#hero-play");
+  if (heroPlay && panels.length) {
+    const pick = panels[Math.floor(Math.random() * panels.length)];
+    heroPlay.dataset.recTarget = pick.dataset.rec;
+    heroPlay.textContent = `▶  Play ${pick.dataset.title}`;
+  }
+
   // load a record's widget as its panel nears the viewport (a hero or track click loads it on demand)
   const preload = () => {
     const io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) ensure(e.target.dataset.rec); }), { rootMargin: "300px" });
