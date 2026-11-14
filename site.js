@@ -274,13 +274,20 @@
   const vm = $("#video-modal");
   if (vm) {
     const frame = $("#vm-frame");
-    const openVideo = (placement) => {
-      if (!vm.showModal) { location.href = vm.dataset.page; return; } // no <dialog>: go to the video page
+    const videos = JSON.parse(vm.dataset.videos);
+    const openVideo = (placement, slug) => {
+      const v = videos[slug] ? slug : vm.dataset.default; // a button names its video; the hero and #watch play the featured one
+      const { yt, title, page } = videos[v];
+      if (!vm.showModal) { location.href = page; return; } // no <dialog>: go to the video page
       if (cur) cur.widget.pause(); // one thing playing at a time
-      frame.innerHTML = ytFrame(vm.dataset.yt, vm.getAttribute("aria-label"));
+      vm.setAttribute("aria-label", title);
+      $(".vm-title", vm).textContent = title;
+      $("[data-vm-page]", vm).href = page;
+      $("[data-vm-yt]", vm).href = "https://youtu.be/" + yt;
+      frame.innerHTML = ytFrame(yt, title);
       vm.showModal();
       history.replaceState(null, "", "#watch");
-      track("video_open", { video: "lesbian-pet-wedding", placement });
+      track("video_open", { video: v, placement });
     };
     vm.addEventListener("close", () => {
       frame.innerHTML = ""; // removing the iframe stops the video
@@ -288,7 +295,7 @@
     });
     document.addEventListener("click", (e) => {
       const o = e.target.closest("[data-video-open]");
-      if (o) { openVideo(o.dataset.videoOpen); return; }
+      if (o) { openVideo(o.dataset.videoOpen, o.dataset.video); return; }
       if (e.target === vm || e.target.closest("[data-video-close]")) vm.close(); // vm itself is only the backdrop
     });
     if (location.hash === "#watch") openVideo("link");
@@ -301,7 +308,7 @@
       if (cur) cur.widget.pause();
       box.innerHTML = ytFrame(box.dataset.yt, box.dataset.title);
       $("iframe", box).focus();
-      track("video_open", { video: "lesbian-pet-wedding", placement: "video-page" });
+      track("video_open", { video: box.dataset.video, placement: "video-page" });
     });
   }
 

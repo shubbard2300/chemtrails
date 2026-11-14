@@ -24,29 +24,66 @@ const SHARE_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v1
 const shareBtn = (title, url, cls = "") => `<button type="button" class="share${cls}" data-share="${esc(url)}" data-title="${esc(title)}" aria-label="Share ${esc(title)}" title="Share">${SHARE_ICON}</button>`;
 const total = records.reduce((n, r) => n + r.tracks.length, 0);
 
-// The music video (YouTube, Chemtrails channel). Page at VIDEO_PATH; a modal on the home page plays it on click.
-const YT = { id: "5M-bsChciaY", channel: "https://www.youtube.com/channel/UCBp1ER64T6_AvGpECk63Z6g" };
-const VIDEO = {
-  slug: "lesbian-pet-wedding",
-  title: "Lesbian Pet Wedding (Official Music Video)",
-  song: "Lesbian Pet Wedding",
-  record: "companion-weather",
-  duration: "PT4M31S",
-  length: "4:31",
-  uploaded: "2026-11-07",
-  desc: "Official music video for \"Lesbian Pet Wedding\" by Chemtrails, a synth-rock project from Portland, Oregon. A 1970s home-movie wedding for Olive and Mika, with the band playing the reception.",
-  alt: "Olive the dog and Mika the cat in wedding veils, a still from the music video",
-};
-const VIDEO_PATH = `/videos/${VIDEO.slug}/`;
-const POSTER = `/assets/video/lesbian-pet-wedding.webp?v=${hash("assets/video/lesbian-pet-wedding.webp")}`;
+// The music videos (YouTube, Chemtrails channel). Each gets a page at /videos/<slug>/ and plays in the one modal.
+// VIDEOS[0] is the featured one: the hero button and the "Now showing" section.
+const YT_CHANNEL = "https://www.youtube.com/channel/UCBp1ER64T6_AvGpECk63Z6g";
+const VIDEOS = [
+  {
+    slug: "lesbian-pet-wedding",
+    yt: "5M-bsChciaY",
+    title: "Lesbian Pet Wedding (Official Music Video)",
+    song: "Lesbian Pet Wedding",
+    by: "Chemtrails",
+    record: "companion-weather",
+    duration: "PT4M31S",
+    length: "4:31",
+    uploaded: "2026-11-07",
+    desc: "Official music video for \"Lesbian Pet Wedding\" by Chemtrails, a synth-rock project from Portland, Oregon. A 1970s home-movie wedding for Olive and Mika, with the band playing the reception.",
+    meta: "Official music video for \"Lesbian Pet Wedding\" by Chemtrails, a synth-rock project from Portland, Oregon. A 1970s home-movie wedding for Olive and Mika.",
+    llms: "a 1970s home-movie wedding for Olive and Mika",
+    alt: "Olive the dog and Mika the cat in wedding veils, a still from the music video",
+    credits: [["Music", "Chemtrails"], ["Starring", "Mika and Olive"]],
+    madeWith: "AI-generated footage, edited by hand. The song was made with Suno.",
+  },
+  {
+    slug: "our-glass-lake",
+    yt: "Sdu90JjIPB0",
+    title: "Our Glass Lake - Venus In Spurs (Official Music Video)",
+    song: "Our Glass Lake",
+    by: "Venus In Spurs",
+    record: "venus-in-spurs",
+    recordCta: true, // a "Watch the video" button in that record's section
+    duration: "PT4M15S",
+    length: "4:15",
+    uploaded: "2026-11-14",
+    desc: "Official music video for \"Our Glass Lake\" by Venus In Spurs, the San Francisco alt-rock band. Four men in black suits, a boiler room full of steam, gas masks at the Cliff House, and an airship nobody ordered.",
+    meta: "Official music video for \"Our Glass Lake\" by Venus In Spurs, the San Francisco alt-rock band. Black suits, a steam-filled boiler room and gas masks at the Cliff House.",
+    llms: "black suits, a steam-filled boiler room and gas masks at the Cliff House",
+    alt: "Four men in black suits and gas masks on the beach below the Cliff House, an airship overhead, a still from the music video",
+    credits: [["Music", "Venus In Spurs"], ["The band", "Scott Burgess (vocals, guitar), Raul Vargas (bass), Greg Piper (drums), Steven Hubbard (keys)"]],
+    madeWith: "AI-generated footage, edited by hand. The song is the band's own recording.",
+  },
+];
+for (const v of VIDEOS) {
+  v.path = `/videos/${v.slug}/`;
+  v.poster = `/assets/video/${v.slug}.webp?v=${hash(`assets/video/${v.slug}.webp`)}`;
+  v.og = `/assets/video/${v.slug}-og.jpeg`;
+}
+const VIDEO = VIDEOS[0];
+const YT = { id: VIDEO.yt, channel: YT_CHANNEL };
+const VIDEO_PATH = VIDEO.path;
+const POSTER = VIDEO.poster;
+// What site.js needs to play any of them in the modal.
+const VIDEO_DATA = Object.fromEntries(VIDEOS.map((v) => [v.slug, { yt: v.yt, title: v.title, page: v.path }]));
+const watchBtn = (v, placement, cls = "btn btn-line") => `<button type="button" class="${cls}" data-video-open="${placement}" data-video="${v.slug}">▶&nbsp;&nbsp;Watch the video</button>`;
 const BAND_ID = SITE + "/#band";
 const crumbs = (items) => ({ "@type": "BreadcrumbList", itemListElement: items.map(([name, path], i) => ({ "@type": "ListItem", position: i + 1, name, item: SITE + path })) });
 const videoDialog = `
-  <dialog class="vmodal" id="video-modal" data-yt="${YT.id}" data-page="${VIDEO_PATH}" aria-label="${esc(VIDEO.title)}">
+  <dialog class="vmodal" id="video-modal" data-videos="${esc(JSON.stringify(VIDEO_DATA))}" data-default="${VIDEO.slug}" aria-label="${esc(VIDEO.title)}">
     <div class="vm-in">
       <div class="vm-bar"><span class="vm-title">${esc(VIDEO.title)}</span><button type="button" class="vm-close" data-video-close aria-label="Close video">✕</button></div>
       <div class="vm-frame" id="vm-frame"></div>
-      <p class="vm-foot"><a href="${VIDEO_PATH}">Video page</a><a href="https://youtu.be/${YT.id}" target="_blank" rel="noopener" data-ev="youtube_click">Watch on YouTube ↗</a></p>
+      <p class="vm-foot"><a href="${VIDEO_PATH}" data-vm-page>Video page</a><a href="https://youtu.be/${YT.id}" target="_blank" rel="noopener" data-ev="youtube_click" data-vm-yt>Watch on YouTube ↗</a></p>
     </div>
   </dialog>`;
 
@@ -88,7 +125,7 @@ function recPanel(r, i, page = false) {
       ${r.by ? `<p class="rec-by">${esc(r.by)}</p>` : ""}
       <div class="rec-notes">${notes || ""}</div>
       <div class="rec-actions">
-        <button type="button" class="btn btn-solid" data-play-rec>▶&nbsp;&nbsp;Play record</button>
+        <button type="button" class="btn btn-solid" data-play-rec>▶&nbsp;&nbsp;Play record</button>${VIDEOS.filter((v) => v.recordCta && v.record === r.slug).map((v) => "\n        " + watchBtn(v, page ? "record-page" : "record")).join("")}
         ${page ? "" : `<a class="btn btn-line" href="/records/${r.slug}/">Liner notes</a>`}
         <a class="btn-link" href="${esc(r.sc)}" target="_blank" rel="noopener" data-ev="soundcloud_click">SoundCloud ↗</a>
       </div>
@@ -383,6 +420,7 @@ records.forEach((r, i) => {
     title: `${r.title} — Chemtrails (${r.tracks.length} tracks)`,
     description: desc,
     path: `/records/${r.slug}/`,
+    modal: VIDEOS.some((v) => v.recordCta && v.record === r.slug),
     body: `\n  <main class="record-page">${recPanel(r, i, true)}\n    <section class="section more-records"><p class="kicker">More records</p><div class="more-grid">${others}</div></section>\n  </main>`,
     jsonld: { "@context": "https://schema.org", "@graph": [albumLd(r), crumbs([["Chemtrails", "/"], [r.title, `/records/${r.slug}/`]])] },
   });
@@ -390,52 +428,52 @@ records.forEach((r, i) => {
   writeFileSync(join(ROOT, "records", r.slug, "index.html"), page);
 });
 
-// ---------- video page ----------
-const vRecord = records.find((r) => r.slug === VIDEO.record);
-const vTrack = vRecord.tracks.find(([t]) => t === VIDEO.song);
-const songUrl = scTrack(vTrack[1]);
-const videoUrl = SITE + VIDEO_PATH;
-const videoLd = {
-  "@type": "VideoObject",
-  "@id": videoUrl + "#video",
-  name: VIDEO.title,
-  description: VIDEO.desc,
-  url: videoUrl,
-  thumbnailUrl: [`${SITE}/assets/video/lesbian-pet-wedding-og.jpeg`, `${SITE}/assets/video/lesbian-pet-wedding.webp`],
-  uploadDate: VIDEO.uploaded,
-  duration: VIDEO.duration,
-  embedUrl: `https://www.youtube.com/embed/${YT.id}`,
-  inLanguage: "en",
-  musicBy: artist,
-  publisher: artist,
-  about: { "@type": "MusicRecording", name: VIDEO.song, url: songUrl, byArtist: artist, inAlbum: { "@type": "MusicAlbum", name: vRecord.title, url: `${SITE}/records/${vRecord.slug}/` } },
-};
-const videoBody = `
+// ---------- video pages ----------
+const videoPages = VIDEOS.map((v) => {
+  const vRecord = records.find((r) => r.slug === v.record);
+  const songUrl = scTrack(vRecord.tracks.find(([t]) => t === v.song)[1]);
+  const videoUrl = SITE + v.path;
+  const band = v.by === "Chemtrails" ? artist : { "@type": "MusicGroup", name: v.by };
+  const videoLd = {
+    "@type": "VideoObject",
+    "@id": videoUrl + "#video",
+    name: v.title,
+    description: v.desc,
+    url: videoUrl,
+    thumbnailUrl: [SITE + v.og, `${SITE}/assets/video/${v.slug}.webp`],
+    uploadDate: v.uploaded,
+    duration: v.duration,
+    embedUrl: `https://www.youtube.com/embed/${v.yt}`,
+    inLanguage: "en",
+    musicBy: band,
+    publisher: artist,
+    about: { "@type": "MusicRecording", name: v.song, url: songUrl, byArtist: band, inAlbum: { "@type": "MusicAlbum", name: vRecord.title, url: `${SITE}/records/${vRecord.slug}/` } },
+  };
+  const body = `
   <main class="video-page">
     <article class="section vp">
       <div class="vp-inner">
-        <p class="kicker">Music video · ${VIDEO.length}</p>
-        <h1 class="vp-title">${esc(VIDEO.song)}</h1>
-        <p class="vp-by">Official music video · Chemtrails</p>
-        <div class="vp-player" id="vp-player" data-yt="${YT.id}" data-title="${esc(VIDEO.title)}">
-          <button type="button" class="ns-poster" data-vp-play aria-label="Play the music video for ${esc(VIDEO.song)}">
-            <img src="${POSTER}" alt="${esc(VIDEO.alt)}" width="1280" height="720" fetchpriority="high" decoding="async">
-            <span class="ns-play" aria-hidden="true">▶</span><span class="ns-time" aria-hidden="true">${VIDEO.length}</span>
+        <p class="kicker">Music video · ${v.length}</p>
+        <h1 class="vp-title">${esc(v.song)}</h1>
+        <p class="vp-by">Official music video · ${esc(v.by)}</p>
+        <div class="vp-player" id="vp-player" data-yt="${v.yt}" data-title="${esc(v.title)}" data-video="${v.slug}">
+          <button type="button" class="ns-poster" data-vp-play aria-label="Play the music video for ${esc(v.song)}">
+            <img src="${v.poster}" alt="${esc(v.alt)}" width="1280" height="720" fetchpriority="high" decoding="async">
+            <span class="ns-play" aria-hidden="true">▶</span><span class="ns-time" aria-hidden="true">${v.length}</span>
           </button>
-          <noscript><iframe src="https://www.youtube-nocookie.com/embed/${YT.id}?rel=0" title="${esc(VIDEO.title)}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></noscript>
+          <noscript><iframe src="https://www.youtube-nocookie.com/embed/${v.yt}?rel=0" title="${esc(v.title)}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></noscript>
         </div>
         <div class="vp-text">
-          <p>${esc(VIDEO.desc)}</p>
+          <p>${esc(v.desc)}</p>
           <dl class="glance">
-            <dt>Music</dt><dd>Chemtrails</dd>
-            <dt>Starring</dt><dd>Mika and Olive</dd>
-            <dt>Length</dt><dd>${VIDEO.length}</dd>
+            ${v.credits.map(([k, val]) => `<dt>${esc(k)}</dt><dd>${esc(val)}</dd>`).join("\n            ")}
+            <dt>Length</dt><dd>${v.length}</dd>
             <dt>Released</dt><dd>2026</dd>
-            <dt>The song</dt><dd><a href="/records/${vRecord.slug}/">${esc(VIDEO.song)}</a>, from the record ${esc(vRecord.title)}</dd>
-            <dt>Made with</dt><dd>AI-generated footage, edited by hand. The song was made with Suno.</dd>
+            <dt>The song</dt><dd><a href="/records/${vRecord.slug}/">${esc(v.song)}</a>, from the record ${esc(vRecord.title)}</dd>
+            <dt>Made with</dt><dd>${esc(v.madeWith)}</dd>
           </dl>
           <div class="rec-actions">
-            <a class="btn btn-solid" href="https://youtu.be/${YT.id}" target="_blank" rel="noopener" data-ev="youtube_click">Watch on YouTube ↗</a>
+            <a class="btn btn-solid" href="https://youtu.be/${v.yt}" target="_blank" rel="noopener" data-ev="youtube_click">Watch on YouTube ↗</a>
             <a class="btn btn-line" href="${songUrl}" target="_blank" rel="noopener" data-ev="soundcloud_click">Listen on SoundCloud ↗</a>
             <a class="btn-link" href="/">More Chemtrails</a>
           </div>
@@ -443,20 +481,22 @@ const videoBody = `
       </div>
     </article>
   </main>`;
-const videoPage = layout({
-  title: `${VIDEO.title} | Chemtrails`,
-  description: `Official music video for "${VIDEO.song}" by Chemtrails, a synth-rock project from Portland, Oregon. A 1970s home-movie wedding for Olive and Mika.`,
-  path: VIDEO_PATH,
-  ogType: "video.other",
-  image: "/assets/video/lesbian-pet-wedding-og.jpeg",
-  body: videoBody,
-  jsonld: { "@context": "https://schema.org", "@graph": [videoLd, crumbs([["Chemtrails", "/"], [VIDEO.song + " (music video)", VIDEO_PATH]])] },
+  const html = layout({
+    title: `${v.title} | Chemtrails`,
+    description: v.meta,
+    path: v.path,
+    ogType: "video.other",
+    image: v.og,
+    body,
+    jsonld: { "@context": "https://schema.org", "@graph": [videoLd, crumbs([["Chemtrails", "/"], [v.song + " (music video)", v.path]])] },
+  });
+  mkdirSync(join(ROOT, "videos", v.slug), { recursive: true });
+  writeFileSync(join(ROOT, "videos", v.slug, "index.html"), html);
+  return html;
 });
-mkdirSync(join(ROOT, "videos", VIDEO.slug), { recursive: true });
-writeFileSync(join(ROOT, "videos", VIDEO.slug, "index.html"), videoPage);
 
 // ---------- sitemap + llms.txt ----------
-const urls = ["/", VIDEO_PATH, ...records.map((r) => `/records/${r.slug}/`)];
+const urls = ["/", ...VIDEOS.map((v) => v.path), ...records.map((r) => `/records/${r.slug}/`)];
 writeFileSync(
   join(ROOT, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
@@ -479,7 +519,7 @@ writeFileSync(
 ## Pages
 
 - [Chemtrails home](${SITE}/): the records, the singles shelf, the video, merch and about
-- [${VIDEO.song} (official music video)](${videoUrl}): a 1970s home-movie wedding for Olive and Mika, ${VIDEO.length}, with credits and links to the song
+${VIDEOS.map((v) => `- [${v.song} (official music video${v.by === "Chemtrails" ? "" : ", " + v.by})](${SITE}${v.path}): ${v.llms}, ${v.length}, with credits and links to the song`).join("\n")}
 
 ## Records (streamable on the site, hosted on SoundCloud)
 
@@ -488,7 +528,7 @@ ${records.map((r) => `- [${r.title}](${SITE}/records/${r.slug}/): ${[r.year, r.g
 ## Listen and support
 
 - [SoundCloud](${SC_USER}): the full catalog
-- [YouTube](${YT.channel}): the music video
+- [YouTube](${YT.channel}): the music videos
 - [Suno](${SUNO}): singles made with Suno
 - [Merch](${SHOP}): hoodies, tees and mugs, printed on demand
 - [Tip jar](https://www.paypal.com/ncp/payment/W5HUHU7FYFXY8): support new recordings
@@ -500,10 +540,10 @@ The artist behind Chemtrails is a West Coast musician and producer born on the O
 );
 
 // Fail loudly on a broken internal link.
-const known = new Set(["/", VIDEO_PATH, ...records.map((r) => `/records/${r.slug}/`)]);
-for (const html of [home, videoPage, ...records.map((r) => readFileSync(join(ROOT, "records", r.slug, "index.html"), "utf8"))]) {
+const known = new Set(["/", ...VIDEOS.map((v) => v.path), ...records.map((r) => `/records/${r.slug}/`)]);
+for (const html of [home, ...videoPages, ...records.map((r) => readFileSync(join(ROOT, "records", r.slug, "index.html"), "utf8"))]) {
   for (const [, href] of html.matchAll(/href="(\/[^"#?]*)/g)) {
     if (!/\.\w+$/.test(href) && !known.has(href)) throw new Error(`broken internal link: ${href}`);
   }
 }
-console.log(`built: ${urls.length} pages (incl. the video page), ${records.length} records, ${total} tracks, ${singles.tracks.length} singles`);
+console.log(`built: ${urls.length} pages (incl. ${VIDEOS.length} video pages), ${records.length} records, ${total} tracks, ${singles.tracks.length} singles`);
