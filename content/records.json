@@ -105,7 +105,7 @@
    "genre": "Dream-Pop",
    "wash": "#1b2250",
    "sc": "https://soundcloud.com/chemtrails/sets/spanish-for-night-owls",
-   "total": "1:06:37",
+   "total": "1:10:38",
    "desc": "Spanish For Night Owls is less a lesson than a seduction.\nIt lives in that strange, beautiful hour when the city softens, the lights blur, and everything starts to feel a little more cinematic.\n\nBuilt on warm Spanish guitar, smoked-out beats, late-night jazz textures, and vocals that drift between intimacy and mystery, the record feels like a whispered conversation on a rooftop at 1:37 a.m. There’s romance here, but it’s not sweet. It’s moodier than that. More knowing. More electric. Like neon on wet pavement, radio static in the distance, and a language you feel before you fully understand it.\n\nThis is music for insomniacs, lovers, smokers, wanderers, and anyone who’s ever learned more from the night than they did during the day.\n\n\"Spanish For Night Owls\" -  doesn’t ask for perfect fluency.\n\nIt asks you to Stay Awake.",
    "tracks": [
     [
@@ -167,6 +167,10 @@
     [
      "Inez",
      "/chemtrails/inez"
+    ],
+    [
+     "We Split Last Thursday",
+     "/chemtrails/we-split-last-thursday"
     ]
    ]
   },
@@ -340,7 +344,7 @@
    "genre": "Electronic",
    "wash": "#14585f",
    "sc": "https://soundcloud.com/chemtrails/sets/am-radio",
-   "total": "15:03",
+   "total": "21:48",
    "desc": "",
    "tracks": [
     [
@@ -350,6 +354,10 @@
     [
      "Ghost Network",
      "/chemtrails/ghost-network"
+    ],
+    [
+     "AM Radio Vampires",
+     "/chemtrails/am-radio-vampires-1"
     ]
    ]
   },
@@ -815,6 +823,13 @@
     "genre": "",
     "art": "assets/grief-in-sequins.webp",
     "sc": "/chemtrails/grief-in-sequins-26"
+   },
+   {
+    "id": "",
+    "title": "Ménage à Bass",
+    "genre": "",
+    "art": "assets/menage-a-bass.webp",
+    "sc": "/chemtrails/menage-a-bass"
    }
   ]
  }
