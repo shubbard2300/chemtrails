@@ -49,7 +49,8 @@
   $$("[data-rec]").forEach((el) => {
     const slug = el.dataset.rec;
     if (!el.dataset.sc) return;
-    const rows = $$(".tracks li, .single[data-i]", el);
+    // set order, not page order: the singles grid is shuffled on load, data-i is each card's set index
+    const rows = $$(".tracks li, .single[data-i]", el).sort((a, b) => (a.dataset.i ?? 0) - (b.dataset.i ?? 0));
     recs[slug] = { slug, el, sc: el.dataset.sc, title: el.dataset.title, art: el.dataset.art, rows, widget: null, ready: false, pending: null, idx: -1, dur: 0 };
     order.push(slug);
   });
@@ -232,6 +233,16 @@
   else addEventListener("load", preload);
 
   // ---------- singles shelf: first two rows, the rest on demand (every card stays in the HTML) ----------
+  // shuffle the cards on every load (Fisher-Yates); playback still follows the set via data-i
+  const grid = $(".single-grid");
+  if (grid) {
+    const cards = $$(":scope > *", grid);
+    for (let i = cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+    grid.append(...cards);
+  }
   const more = $("[data-more]");
   if (more) {
     const items = $$(".single-grid > *");
