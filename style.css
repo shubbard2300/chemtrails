@@ -350,6 +350,7 @@ h2 {
 /* now showing: the music video card, its page and the modal */
 .nowshowing { background: var(--ink); }
 .ns-grid { display: grid; grid-template-columns: minmax(280px, 7fr) 5fr; gap: clamp(28px, 5vw, 72px); align-items: center; max-width: 1320px; margin: 0 auto; }
+.ns-grid + .ns-grid { margin-top: clamp(56px, 8vw, 112px); }
 .ns-poster {
   position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; overflow: hidden;
   background: var(--ink-2); border: 6px solid var(--bone); box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55); cursor: pointer;

@@ -25,9 +25,28 @@ const shareBtn = (title, url, cls = "") => `<button type="button" class="share${
 const total = records.reduce((n, r) => n + r.tracks.length, 0);
 
 // The music videos (YouTube, Chemtrails channel). Each gets a page at /videos/<slug>/ and plays in the one modal.
-// VIDEOS[0] is the featured one: the hero button and the "Now showing" section.
+// VIDEOS[0] is the featured one: the hero button and #watch. Entries with `card` get a "Now showing" card, in list order.
 const YT_CHANNEL = "https://www.youtube.com/channel/UCBp1ER64T6_AvGpECk63Z6g";
 const VIDEOS = [
+  {
+    slug: "we-split-last-thursday",
+    yt: "qYGg00EIdLw",
+    title: "We Split Last, Thursday (Official Music Video)",
+    song: "We Split Last, Thursday",
+    track: "We Split Last Thursday", // as listed in records.json
+    by: "Chemtrails",
+    record: "spanish-for-night-owls",
+    duration: "PT6M20S",
+    length: "6:20",
+    uploaded: "2026-11-24",
+    desc: "Official music video for \"We Split Last, Thursday\" by Chemtrails, a synth-rock project from Portland, Oregon. A grieving woman in a flooded far-future village on the Oregon coast sings through a night of rain and fog, two moons over the kitchen sink, until first light.",
+    meta: "Official music video for \"We Split Last, Thursday\" by Chemtrails, a synth-rock project from Portland, Oregon. Rain, fog and two moons over the kitchen sink, from grief to first light.",
+    llms: "a grieving woman in a flooded far-future Oregon coast village, two moons over the kitchen sink, from grief to first light",
+    alt: "A young woman in a black blazer at a stone kitchen sink, two moons over the sea in the window behind her, a still from the music video",
+    card: "The music video. A grieving woman in a flooded far-future village on the Oregon coast, two moons over the kitchen sink, from grief to first light.",
+    credits: [["Music", "Chemtrails"]],
+    madeWith: "AI-generated footage, edited by hand. The song was made with Suno.",
+  },
   {
     slug: "lesbian-pet-wedding",
     yt: "5M-bsChciaY",
@@ -42,6 +61,7 @@ const VIDEOS = [
     meta: "Official music video for \"Lesbian Pet Wedding\" by Chemtrails, a synth-rock project from Portland, Oregon. A 1970s home-movie wedding for Olive and Mika.",
     llms: "a 1970s home-movie wedding for Olive and Mika",
     alt: "Olive the dog and Mika the cat in wedding veils, a still from the music video",
+    card: "The music video. A 1970s home-movie wedding for Olive and Mika, with the band playing the reception.",
     credits: [["Music", "Chemtrails"], ["Starring", "Mika and Olive"]],
     madeWith: "AI-generated footage, edited by hand. The song was made with Suno.",
   },
@@ -72,7 +92,6 @@ for (const v of VIDEOS) {
 const VIDEO = VIDEOS[0];
 const YT = { id: VIDEO.yt, channel: YT_CHANNEL };
 const VIDEO_PATH = VIDEO.path;
-const POSTER = VIDEO.poster;
 // What site.js needs to play any of them in the modal.
 const VIDEO_DATA = Object.fromEntries(VIDEOS.map((v) => [v.slug, { yt: v.yt, title: v.title, page: v.path }]));
 const watchBtn = (v, placement, cls = "btn btn-line") => `<button type="button" class="${cls}" data-video-open="${placement}" data-video="${v.slug}">▶&nbsp;&nbsp;Watch the video</button>`;
@@ -283,22 +302,22 @@ ${SCENE}
     <div class="hero-foot" aria-hidden="true"><span>${records.length} records · ${total} tracks</span><span>Scroll ↓</span></div>
   </header>
   <main>
-    <section class="section nowshowing" id="video">
+    <section class="section nowshowing" id="video">${VIDEOS.filter((v) => v.card).map((v) => `
       <div class="ns-grid">
-        <button type="button" class="ns-poster" data-video-open="card" aria-label="Watch the music video for ${esc(VIDEO.song)} (${VIDEO.length})">
-          <img src="${POSTER}" alt="${esc(VIDEO.alt)}" width="1280" height="720" loading="lazy" decoding="async">
-          <span class="ns-play" aria-hidden="true">▶</span><span class="ns-time" aria-hidden="true">${VIDEO.length}</span>
+        <button type="button" class="ns-poster" data-video-open="card" data-video="${v.slug}" aria-label="Watch the music video for ${esc(v.song)} (${v.length})">
+          <img src="${v.poster}" alt="${esc(v.alt)}" width="1280" height="720" loading="lazy" decoding="async">
+          <span class="ns-play" aria-hidden="true">▶</span><span class="ns-time" aria-hidden="true">${v.length}</span>
         </button>
         <div class="ns-copy">
           <p class="kicker">Now showing</p>
-          <h2>${esc(VIDEO.song)}</h2>
-          <p>The music video. A 1970s home-movie wedding for Olive and Mika, with the band playing the reception.</p>
+          <h2>${esc(v.song)}</h2>
+          <p>${esc(v.card)}</p>
           <div class="rec-actions">
-            <button type="button" class="btn btn-solid" data-video-open="card-button">▶&nbsp;&nbsp;Watch the video</button>
-            <a class="btn-link" href="${VIDEO_PATH}">Video page</a>
+            <button type="button" class="btn btn-solid" data-video-open="card-button" data-video="${v.slug}">▶&nbsp;&nbsp;Watch the video</button>
+            <a class="btn-link" href="${v.path}">Video page</a>
           </div>
         </div>
-      </div>
+      </div>`).join("")}
     </section>
 
     <section class="section singles" id="singles"${singles.sc ? ` data-rec="singles" data-sc="${esc(singles.sc)}" data-title="Singles" data-art="/assets/orbitz.webp?v=${hash("assets/orbitz.webp")}"` : ""}>
@@ -431,7 +450,7 @@ records.forEach((r, i) => {
 // ---------- video pages ----------
 const videoPages = VIDEOS.map((v) => {
   const vRecord = records.find((r) => r.slug === v.record);
-  const songUrl = scTrack(vRecord.tracks.find(([t]) => t === v.song)[1]);
+  const songUrl = scTrack(vRecord.tracks.find(([t]) => t === (v.track || v.song))[1]); // `track` when the record lists the title differently
   const videoUrl = SITE + v.path;
   const band = v.by === "Chemtrails" ? artist : { "@type": "MusicGroup", name: v.by };
   const videoLd = {
