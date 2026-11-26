@@ -11,6 +11,10 @@ const SITE = "https://www.chemtrails-music.com";
 const SC_USER = "https://soundcloud.com/chemtrails";
 const SUNO = "https://suno.com/@gamecat2300";
 const SHOP = "https://chemtrails-music.myspreadshop.com/";
+const FB = "https://www.facebook.com/ChemtrailsMusic";
+const IG = "https://www.instagram.com/chemtrails.band";
+const SPOTIFY = "https://open.spotify.com/artist/64kqKKXxzd2POSCzFz4utw";
+const APPLE = "https://music.apple.com/us/artist/chemtrails/404715979";
 const GA = "G-CT6DLJGNE0";
 const { records, singles } = JSON.parse(readFileSync(join(ROOT, "content/records.json"), "utf8"));
 
@@ -240,7 +244,11 @@ ${body}
     <span>© 2026 Chemtrails</span>
     <div class="footer-links">
       <a href="${SC_USER}" target="_blank" rel="noopener">SoundCloud</a>
+      <a href="${SPOTIFY}" target="_blank" rel="noopener">Spotify</a>
+      <a href="${APPLE}" target="_blank" rel="noopener">Apple Music</a>
       <a href="${YT.channel}" target="_blank" rel="noopener" data-ev="youtube_click">YouTube</a>
+      <a href="${IG}" target="_blank" rel="noopener">Instagram</a>
+      <a href="${FB}" target="_blank" rel="noopener">Facebook</a>
       <a href="${SUNO}" target="_blank" rel="noopener">Suno</a>
       <a href="${SHOP}?utm_source=chemtrails-music.com&utm_medium=footer&utm_campaign=merch" target="_blank" rel="noopener">Shop</a>
     </div>
@@ -389,7 +397,8 @@ ${records.map((r, i) => recPanel(r, i)).join("\n")}
             <dt>Sound</dt><dd>dreamy synth rock, cosmic disco, psychedelic pop, vintage science fiction</dd>
             <dt>Catalog</dt><dd>${records.length} records (${total} tracks) and ${singles.tracks.length} singles</dd>
             <dt>Newest</dt><dd>the music video for "${esc(VIDEO.song)}" (2026)</dd>
-            <dt>Listen</dt><dd><a href="${SC_USER}" target="_blank" rel="noopener">SoundCloud</a> and <a href="${YT.channel}" target="_blank" rel="noopener" data-ev="youtube_click">YouTube</a></dd>
+            <dt>Listen</dt><dd><a href="${SC_USER}" target="_blank" rel="noopener">SoundCloud</a>, <a href="${SPOTIFY}" target="_blank" rel="noopener">Spotify</a>, <a href="${APPLE}" target="_blank" rel="noopener">Apple Music</a> and <a href="${YT.channel}" target="_blank" rel="noopener" data-ev="youtube_click">YouTube</a></dd>
+            <dt>Follow</dt><dd><a href="${IG}" target="_blank" rel="noopener">Instagram</a> and <a href="${FB}" target="_blank" rel="noopener">Facebook</a></dd>
           </dl>
           <p>A West Coast musician and producer who records as Chemtrails: a solo project built on ambient texture, cinematic atmosphere, and the gray weight of Pacific Northwest fog.</p>
           <p>Born on the Oregon coast, he picked up a trumpet at six and never really stopped chasing sound. His instincts formed early, shaped by the records that filled the rooms of his childhood, deepened by the rave and DJ culture of Portland and San Francisco, and refined across decades of band work, studio obsession, and an unrelenting appetite for what sound can do to a room.</p>
@@ -421,7 +430,7 @@ const home = layout({
         description: "A retro-futuristic synth-rock project exploring the strange space between memory, technology, desire, and the unknown. Dreamy synth rock, cosmic disco, psychedelic pop, and vintage science fiction from the Pacific Northwest.",
         genre: ["Synth-Rock", "Ambient", "Cosmic Disco", "Psychedelic Pop"],
         foundingLocation: { "@type": "Place", name: "Portland, Oregon, United States" },
-        sameAs: [SC_USER, YT.channel, SUNO, SHOP],
+        sameAs: [SC_USER, SPOTIFY, APPLE, YT.channel, IG, FB, SUNO, SHOP],
         album: records.map((r) => ({ "@type": "MusicAlbum", name: r.title, url: `${SITE}/records/${r.slug}/`, numTracks: r.tracks.length })),
       },
     ],
@@ -547,7 +556,11 @@ ${records.map((r) => `- [${r.title}](${SITE}/records/${r.slug}/): ${[r.year, r.g
 ## Listen and support
 
 - [SoundCloud](${SC_USER}): the full catalog
+- [Spotify](${SPOTIFY}): the store releases
+- [Apple Music](${APPLE}): the store releases
 - [YouTube](${YT.channel}): the music videos
+- [Instagram](${IG}): clips and news
+- [Facebook](${FB}): clips and news
 - [Suno](${SUNO}): singles made with Suno
 - [Merch](${SHOP}): hoodies, tees and mugs, printed on demand
 - [Tip jar](https://www.paypal.com/ncp/payment/W5HUHU7FYFXY8): support new recordings
