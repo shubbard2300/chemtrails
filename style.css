@@ -477,8 +477,9 @@ html:has(.vmodal[open]) { overflow: hidden; }
   padding: 32px var(--gut); border-top: 1px solid var(--line);
   font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bone-dim);
 }
-.footer-links { display: flex; flex-wrap: wrap; gap: 10px 22px; }
-.footer-links a { text-decoration: none; }
+.footer-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.footer-links a { display: inline-flex; padding: 2px; text-decoration: none; }
+.footer-links svg { display: block; }
 .footer-links a:hover { color: var(--ochre); }
 
 /* player bar */
