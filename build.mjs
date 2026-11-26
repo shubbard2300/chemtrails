@@ -83,6 +83,24 @@ const VIDEOS = [
     madeWith: "AI-generated footage, edited by hand. The song was made with Suno.",
   },
   {
+    slug: "menage-a-bass",
+    yt: "Qx-Bsy9GQNk",
+    title: "Ménage à Bass (Official Music Video)",
+    song: "Ménage à Bass",
+    by: "Chemtrails",
+    single: true, // on the singles shelf, not a record
+    duration: "PT3M10S",
+    length: "3:10",
+    uploaded: "2026-11-25",
+    desc: "Official music video for \"Ménage à Bass\" by Chemtrails, a synth-rock project from Portland, Oregon. Three calico cat women drive a 1960s dream car across red dunes, talk their way past a pack of alien cats while the old temples fall, and play a firelit ritual at a desert temple club until it comes down around them.",
+    meta: "Official music video for \"Ménage à Bass\" by Chemtrails, a synth-rock project from Portland, Oregon. Three cat women, a 1960s dream car, alien cats and a desert temple club.",
+    llms: "three calico cat women, a 1960s dream car, alien cats and a firelit desert temple club, in a 1960s Italian sci-fi look",
+    alt: "Three calico cat women riding in a cream open-top sports car across red dunes at sunset, one standing with her arms spread wide, a still from the music video",
+    card: "The music video. Three calico cat women, a 1960s dream car, a pack of alien cats and a desert temple club that comes down around them.",
+    credits: [["Music", "Chemtrails"]],
+    madeWith: "AI-generated footage, edited by hand. The song was made with Suno.",
+  },
+  {
     slug: "our-glass-lake",
     yt: "Sdu90JjIPB0",
     title: "Our Glass Lake - Venus In Spurs (Official Music Video)",
@@ -471,8 +489,10 @@ records.forEach((r, i) => {
 
 // ---------- video pages ----------
 const videoPages = VIDEOS.map((v) => {
-  const vRecord = records.find((r) => r.slug === v.record);
-  const songUrl = scTrack(vRecord.tracks.find(([t]) => t === (v.track || v.song))[1]); // `track` when the record lists the title differently
+  const vRecord = v.single ? null : records.find((r) => r.slug === v.record); // singles have no record
+  const songUrl = scTrack(v.single
+    ? singles.tracks.find((t) => t.title === (v.track || v.song)).sc
+    : vRecord.tracks.find(([t]) => t === (v.track || v.song))[1]); // `track` when the record lists the title differently
   const videoUrl = SITE + v.path;
   const band = v.by === "Chemtrails" ? artist : { "@type": "MusicGroup", name: v.by };
   const videoLd = {
@@ -488,7 +508,7 @@ const videoPages = VIDEOS.map((v) => {
     inLanguage: "en",
     musicBy: band,
     publisher: artist,
-    about: { "@type": "MusicRecording", name: v.song, url: songUrl, byArtist: band, inAlbum: { "@type": "MusicAlbum", name: vRecord.title, url: `${SITE}/records/${vRecord.slug}/` } },
+    about: { "@type": "MusicRecording", name: v.song, url: songUrl, byArtist: band, ...(vRecord ? { inAlbum: { "@type": "MusicAlbum", name: vRecord.title, url: `${SITE}/records/${vRecord.slug}/` } } : {}) },
   };
   const body = `
   <main class="video-page">
@@ -510,7 +530,7 @@ const videoPages = VIDEOS.map((v) => {
             ${v.credits.map(([k, val]) => `<dt>${esc(k)}</dt><dd>${esc(val)}</dd>`).join("\n            ")}
             <dt>Length</dt><dd>${v.length}</dd>
             <dt>Released</dt><dd>2026</dd>
-            <dt>The song</dt><dd><a href="/records/${vRecord.slug}/">${esc(v.song)}</a>, from the record ${esc(vRecord.title)}</dd>
+            <dt>The song</dt><dd>${vRecord ? `<a href="/records/${vRecord.slug}/">${esc(v.song)}</a>, from the record ${esc(vRecord.title)}` : `<a href="/#singles">${esc(v.song)}</a>, a single on the Loose Transmissions shelf`}</dd>
             <dt>Made with</dt><dd>${esc(v.madeWith)}</dd>
           </dl>
           <div class="rec-actions">
