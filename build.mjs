@@ -80,7 +80,7 @@ const VIDEOS = [
     meta: "Official music video for \"Our Glass Lake\" by Venus In Spurs, the San Francisco alt-rock band. Black suits, a steam-filled boiler room and gas masks at the Cliff House.",
     llms: "black suits, a steam-filled boiler room and gas masks at the Cliff House",
     alt: "Four men in black suits and gas masks on the beach below the Cliff House, an airship overhead, a still from the music video",
-    credits: [["Music", "Venus In Spurs"], ["The band", "Scott Burgess (vocals, guitar), Raul Vargas (bass), Greg Piper (drums), Steven Hubbard (keys)"]],
+    credits: [["Music", "Venus In Spurs"], ["The band", "Scott Burgess (vocals, guitar), Raul Vargas (bass), Greg Piper (drums), The Gamecat (keys)"]],
     madeWith: "AI-generated footage, edited by hand. The song is the band's own recording.",
   },
 ];
